@@ -7,15 +7,21 @@
 
        
         public function index(){
+            
             $this->view->dados = array('sofa', 'cadeira', 'cama');
             //Chamando o conteudo da página que deverá ser acessado pelo index.
-            $this->render('index');
+            //Primeiro parâmetro -> dados que deverão aparecer na página
+            //Segundo parâmetro -> Quais as caractéristicas padrões devem ser obedecidas
+            $this->render('index', 'layout1');
         }
 
         public function sobreNos(){
-            //Chamando o conteudo da página que deverá ser acessado pelo sobre_nos
+            
             $this->view->dados = array('sofa', 'cadeira');
-            $this->render('sobreNos');
+            //Chamando o conteudo da página que deverá ser acessado pelo sobre_nos
+            //Primeiro parâmetro -> dados que deverão aparecer na página
+            //Segundo parâmetro -> Quais as caractéristicas padrões devem ser obedecidas
+            $this->render('sobreNos', 'layout2');
             
         }
 
