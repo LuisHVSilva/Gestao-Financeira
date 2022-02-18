@@ -1,4 +1,8 @@
 <?php
     require_once "../vendor/autoload.php";
-    echo 'deu bom'
+
+    $route = new \App\Route;
+    
+    print_r($route->getUrl());
+    
 ?>
