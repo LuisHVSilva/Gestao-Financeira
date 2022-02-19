@@ -24,3 +24,20 @@ header{
 main{
     color: snow;
 }
+
+
+#entrar-form input,
+#inscreverse-form input{
+    background-color: black;
+    color: snow;
+    font-weight: bold;
+    box-shadow:0 0 1px 1px pink;
+}
+
+#entrar-form input:hover,
+#inscreverse-form input:hover{
+    background-color: pink;
+    font-weight: bold;
+    box-shadow:0 0 1px 1px black;
+}
+

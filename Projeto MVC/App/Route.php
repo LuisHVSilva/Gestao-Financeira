@@ -16,6 +16,17 @@
                 'action' => 'index' //Qual a ação/método dentro do controlador deverá ser executada
             );
 
+            $routes['inscreverse'] = array(
+                'route' => '/inscreverse',
+                'controller' => 'IndexController',
+                'action' => 'inscreverse' 
+            );
+
+            $routes['registrar'] = array(
+                'route' => '/registrar',
+                'controller' => 'IndexController',
+                'action' => 'registrar' 
+            );
 
             //Adicionando os atributos array criados acima na variável privada routes
             $this->setRoutes($routes);

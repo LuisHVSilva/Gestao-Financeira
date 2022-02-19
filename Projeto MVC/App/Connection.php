@@ -8,7 +8,7 @@ class Connection{
     public static function getDb(){
 
         $host = "localhost:3312";
-        $dbname = "mvc;charset=utf8";
+        $dbname = "gestao_gastos;charset=utf8";
         $user = "root";
         $pass = "";    
 
