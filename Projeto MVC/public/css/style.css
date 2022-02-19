@@ -1,0 +1,26 @@
+body{
+    background-color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header{
+    color: pink;
+}
+
+#topo{
+    text-decoration: none;
+    color: pink;
+}
+
+#card{
+    border: 1px solid red;
+    margin-left: 2px;
+}
+
+#titulo{
+    border-bottom: 1px solid white;
+}
+
+main{
+    color: snow;
+}

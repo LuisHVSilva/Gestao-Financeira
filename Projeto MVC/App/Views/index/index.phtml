@@ -1,9 +1,56 @@
+<div class="container mt-5">
 
-<h1>Index</h1>
-<hr>
-<?php    
-    foreach($this->view->dados as $indice => $produto){
-        echo $produto['id'] . ' - ' . $produto['descricao'] . ' - ' . $produto['preco'];
-        echo '<br>';
-    }
-?>
+    <div class="row border-bottom border-top border-light mb-5" id="topo">
+
+        <div class="col-md-6 p-2 border-end border-light mb-2">
+            <p class="text-center">Bem vindo à sua gestão financeira móvel, em qualquer lugar e em qualquer dispositivo seu dinheiro organizado de forma confiável e simples.</p>
+        </div>
+
+        <div class="col-md-5">
+            <form class="form-group mt-3" action="" method="post">
+                <div class="d-flex justify-content-center mb-2">
+                    <input type="text" class="form-control form-control-sm" id="usuario" placeholder="Usuário">
+                </div>
+
+                <div class="d-flex justify-content-center mb-2">
+                    <input type="passowrd" class="form-control form-control-sm" id="senha" placeholder="Senha">
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-outline-light btn-block">
+                        <a href="#" id="topo">Entrar</a>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+    <main>
+        <p class="border-bottom border-light">
+            Não sabe para onde seu dinheiro ta indo? Tem aquela sensação de que trabalha, trabalha e trabalha, mas nunca tem a segurança da reserva de emergência ou dinheiro para conseguir luxos e diversões? É, mexer com dinheiro não é tão fácil quanto parece...
+            <br>
+            Aqui, com apenas um celular e internet, você poderá começar a registrar cada gasto seu diário, desda balinha à contas fixas, encontrando, por fim, onde está o buraco negro que puxa seu dinheiro e não deixa nenhum <i>tostão</i> para guardar.
+            <br>
+            Tá tá, muitas promessas mas pouca ação. Bem, estou te oferencendo uma das diversas ferramentas que existem para gerenciar seus gastos, suas economias, seus sonhos, porém efetuar cabe a você.
+            <br>
+            Então mão na massa, depois de saber o que está acontecendo, o que deve ser feito depende de você e o quanto deseja concretizar uma melhoria monetária na sua vida.
+        </p>
+
+        <div class="row mt-5">
+            <p class="h3 text-center mb-3">Alguns conteúdos...</p>
+            <div class="col-md-4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores minus similique est perferendis, placeat, magnam aut dolore soluta, quam omnis labore repellat. Aut, adipisci minus dolore facere placeat voluptatem debitis.
+            </div>
+            
+            <div class="col-md-4">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde similique vitae vel maiores possimus quo quisquam doloremque quaerat dicta. Qui maxime reiciendis in nisi neque ipsa debitis, perferendis illo quis!
+            </div>
+            
+            <div class="col-md-4">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. In deleniti laboriosam, quae nobis iure nostrum reiciendis. Consequatur quia ducimus quibusdam vitae, dignissimos molestiae. Neque delectus, quasi libero animi repellendus quod.
+            </div>
+        </div>
+    </main>
+</div>

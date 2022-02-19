@@ -16,11 +16,6 @@
                 'action' => 'index' //Qual a ação/método dentro do controlador deverá ser executada
             );
 
-            $routes['sobre_nos'] = array(
-                'route' => '/sobre_nos',
-                'controller' => 'IndexController',
-                'action' => 'sobreNos'
-            );
 
             //Adicionando os atributos array criados acima na variável privada routes
             $this->setRoutes($routes);
