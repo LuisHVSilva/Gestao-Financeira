@@ -10,6 +10,7 @@
         /*Configurar quais são as rotas que o MVC possuem*/
         protected function initRoutes(){
 
+            //Rotas antes do login
             $routes['home'] = array(
                 'route' => '/', //Qual a rota será atingida, página que o usuário está
                 'controller' => 'IndexController', //Qual controlador deverá ser usado
@@ -26,6 +27,25 @@
                 'route' => '/registrar',
                 'controller' => 'IndexController',
                 'action' => 'registrar' 
+            );
+
+            //Rotas Depois do login
+            $routes['autenticar'] = array(
+                'route' => '/autenticar',
+                'controller' => 'AuthController',//Controle de usuário
+                'action' => 'autenticar' 
+            );            
+            
+            $routes['sair'] = array(
+                'route' => '/sair',
+                'controller' => 'AuthController',//Controle de usuário
+                'action' => 'sair' 
+            );
+
+            $routes['entrada'] = array(
+                'route' => '/entrada',
+                'controller' => 'AppController', //Conteúdo para usuário
+                'action' => 'entrada' 
             );
 
             //Adicionando os atributos array criados acima na variável privada routes

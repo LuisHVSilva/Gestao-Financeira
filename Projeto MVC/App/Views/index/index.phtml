@@ -1,30 +1,35 @@
 <div class="container mt-5">
 
+    <?php if ($this->view->login == 'erro') { ?>
+        <div class="d-flex justify-content-end">
+            <span class="text text-danger">Email e/ou senha inválido(s)</span>
+        </div>
+    <?php } ?>
+
     <div class="row border-bottom border-top border-light mb-5" id="topo">
 
-        <div class="col-md-6 p-2 border-end border-light mb-2">
+        <div class="col-md-6 p-2 mb-2">
             <p class="text-center">Bem vindo à sua gestão financeira móvel, em qualquer lugar e em qualquer dispositivo seu dinheiro organizado de forma confiável e simples.</p>
         </div>
 
         <div class="col-md-5">
-            <form class="form-group mt-3" action="" method="post" id="entrar-form">
+
+            <form class="form-group mt-3" action="/autenticar" method="post" id="entrar-form">
                 <div class="d-flex justify-content-center mb-2">
-                    <input type="text" class="form-control form-control-sm" id="usuario" placeholder="Usuário">
+                    <input type="text" class="form-control form-control-sm" name="email" placeholder="Usuário">
                 </div>
 
                 <div class="d-flex justify-content-center mb-2">
-                    <input type="passowrd" class="form-control form-control-sm" id="senha" placeholder="Senha">
+                    <input type="password" class="form-control form-control-sm" name="senha" placeholder="Senha">
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-outline-light btn-block">
+                    <button class="btn btn-outline-light" style="color: pink">
+                        Entrar
+                    </button>
+                    <button class="btn btn-outline-light">
                         <a href="/inscreverse" id="topo">Inscrever-se</a>
                     </button>
-                    
-                    <button class="btn btn-outline-light btn-block">
-                        <a href="#" id="topo">Entrar</a>
-                    </button>
-                    
                 </div>
             </form>
 
@@ -48,11 +53,11 @@
             <div class="col-md-4">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores minus similique est perferendis, placeat, magnam aut dolore soluta, quam omnis labore repellat. Aut, adipisci minus dolore facere placeat voluptatem debitis.
             </div>
-            
+
             <div class="col-md-4">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde similique vitae vel maiores possimus quo quisquam doloremque quaerat dicta. Qui maxime reiciendis in nisi neque ipsa debitis, perferendis illo quis!
             </div>
-            
+
             <div class="col-md-4">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. In deleniti laboriosam, quae nobis iure nostrum reiciendis. Consequatur quia ducimus quibusdam vitae, dignissimos molestiae. Neque delectus, quasi libero animi repellendus quod.
             </div>

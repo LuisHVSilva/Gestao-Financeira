@@ -10,11 +10,11 @@
        
         public function index(){
 
-
+            $this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
             //Chamando o conteudo da página que deverá ser acessado pelo index.
             //Primeiro parâmetro -> dados que deverão aparecer na página
             //Segundo parâmetro -> Quais as caractéristicas padrões devem ser obedecidas
-            $this->render('index', 'layout');
+            $this->render('index', 'layout-index');
         }
 
         public function inscreverse(){
@@ -27,7 +27,7 @@
             //Chamando o conteudo da página que deverá ser acessado pelo index.
             //Primeiro parâmetro -> dados que deverão aparecer na página
             //Segundo parâmetro -> Quais as caractéristicas padrões devem ser obedecidas
-            $this->render('inscreverse', 'layout');
+            $this->render('inscreverse', 'layout-index');
         }
 
         public function registrar(){
@@ -57,7 +57,7 @@
                 );
 
                 $this->view->erroCadastro = true;
-                $this->render('inscreverse', 'layout');
+                $this->render('inscreverse', 'layout-index');
 
             };
         }

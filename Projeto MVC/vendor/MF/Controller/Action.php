@@ -34,7 +34,7 @@
             //Removendo o termo Controller e deixando tudo em letra minuscula
             $classeAtual = strtolower(str_replace('Controller', '', $classeAtual));
 
-            require_once "../App/Views/index/".$this->view->page.".phtml";
+            require_once "../App/Views/".$classeAtual."/".$this->view->page.".phtml";
         }
 
     }

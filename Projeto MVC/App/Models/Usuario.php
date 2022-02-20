@@ -75,6 +75,35 @@
 
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
+
+        //recuperar usuário por email e saber se ja existe
+        public function autenticar(){
+            //Criando query de linguagem SQL para recuperar usuário por email e senha
+            $query = 'SELECT id, nome, email FROM usuarios WHERE email = :email AND senha = :senha';
+
+            //Criando o PreparetStatment (Preparando conexão)
+            $stmt = $this->db->prepare($query);
+
+            //Atribuindo dinâmicamente os valores variados de email e senha na query acima com o uso da função set
+            $stmt->bindValue(':email', $this->__get('email')); 
+            $stmt->bindValue(':senha', $this->__get('senha')); 
+
+            //executando o comando sql
+            $stmt->execute();
+
+            //Criando variável para receber o unico valor existente na consulta SQL
+            $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+            
+            //Verificando se existe o cliente no banco
+            if(!empty($usuario['id']) && !empty($usuario['nome'])){
+                $this->__set('id', $usuario['id']);
+                $this->__set('nome', $usuario['nome']);
+            }
+
+            
+            //Retornando a lista da seleção com índices de acordo com o nome de cada coluna da tabela
+            return $this;
+        }
     }
 
 ?>
