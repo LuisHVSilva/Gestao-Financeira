@@ -10,7 +10,9 @@
        
         public function index(){
 
+            //caso houver um erro de autentificação, o parâmetro será definido como 'erro' ($get[lgin]), caso foi sucesso, não haverá parâmetro
             $this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
+            
             //Chamando o conteudo da página que deverá ser acessado pelo index.
             //Primeiro parâmetro -> dados que deverão aparecer na página
             //Segundo parâmetro -> Quais as caractéristicas padrões devem ser obedecidas
@@ -36,7 +38,7 @@
             $usuario = Container::getModel('Usuario');
             $usuario->__set('nome', $_POST['nome']);
             $usuario->__set('email', $_POST['email']);
-            $usuario->__set('senha', $_POST['senha']);
+            $usuario->__set('senha', md5($_POST['senha']));
 
             
             //Verificando se pode haver um novo cadastro no banco de dados
@@ -47,7 +49,7 @@
                 $usuario->salvar();  
 
                 //Passando a view para o usuário que o cadastro foi bem sucedido
-                $this->render('index', 'layout');                                
+                $this->render('index', 'layout-index');                                
                 
             }else{
 
@@ -57,7 +59,7 @@
                 );
 
                 $this->view->erroCadastro = true;
-                $this->render('inscreverse', 'layout-index');
+                $this->render('inscreverse', 'layout');
 
             };
         }

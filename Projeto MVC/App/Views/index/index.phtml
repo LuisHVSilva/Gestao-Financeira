@@ -1,10 +1,12 @@
 <div class="container mt-5">
 
-    <?php if ($this->view->login == 'erro') { ?>
-        <div class="d-flex justify-content-end">
-            <span class="text text-danger">Email e/ou senha inválido(s)</span>
-        </div>
-    <?php } ?>
+    <?php if($this->view->login == 'erro'){ ?>
+		<div class="row">
+			<div class="col">
+				<span class="text text-danger">E-mail ou senha inválido(s)</span>
+			</div>
+		</div>
+		<?php }; ?>
 
     <div class="row border-bottom border-top border-light mb-5" id="topo">
 
@@ -27,11 +29,12 @@
                     <button class="btn btn-outline-light" style="color: pink">
                         Entrar
                     </button>
-                    <button class="btn btn-outline-light">
-                        <a href="/inscreverse" id="topo">Inscrever-se</a>
-                    </button>
+                    
                 </div>
             </form>
+
+                        <a href="/inscreverse" id="topo">Inscrever-se</a>
+                    
 
         </div>
 

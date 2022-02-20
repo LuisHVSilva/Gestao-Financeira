@@ -13,7 +13,7 @@
             
             //Atribuindo os valore de email e senha na instância Usuario
             $usuario->__set('email', $_POST['email']);
-            $usuario->__set('senha', $_POST['senha']);
+            $usuario->__set('senha', md5($_POST['senha']));
 
             //Autenticando o usuário a partir de uma instância            
             $usuario->autenticar();
