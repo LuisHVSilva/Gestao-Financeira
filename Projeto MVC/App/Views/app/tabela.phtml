@@ -1,29 +1,60 @@
 
-<div class="container mt-5">
+<script>
+  
+  function remover (id){
+    location.href = '/excluir?&id='+id;
+  }
+  
+</script>
+
+<div class="container-fluid mt-5">
 
 <table class="table table-dark table-striped">
   <thead>
-    <tr>
+    <tr class="text-center">
       <th scope="col">#</th>
-      <th scope="col">Descricao</th>
+      <th scope="col-auto">Descricao</th>
       <th scope="col">Valor</th>
       <th scope="col">Tipo</th>
       <th scope="col">Data de Gasto</th>
       <th scope="col">Data gravamento</th>
+      <th scope="col">Apagar</th>      
     </tr>
   </thead>
   
   <tbody>
   <?php 
-    $i = 0;
+    $i = 1;
     foreach($this->view->gastos as $id_gastos => $gastos){ ?>
-    <tr>
+    <tr class="text-center">
       <th scope="row"><?php echo $i; ?></th>
-      <td><?php echo $gastos['descricao']; ?></td>
-      <td><?php echo $gastos['valor']; ?></td>
-      <td><?php echo $gastos['tipo']; ?></td>
-      <td><?php echo $gastos['data']; ?></td>
-      <td><?php echo $gastos['data_gravada']; ?></td>
+      
+      <td>
+        <?php echo $gastos['descricao']; ?>
+      </td>
+
+      <td>
+        <?php echo $gastos['valor']; ?>
+      </td>
+
+      <td>
+        <?php echo $gastos['tipo']; ?>
+      </td>
+
+      <td>
+        <?php echo $gastos['data']; ?>
+      </td>
+
+      <td>
+        <?php echo $gastos['data_gravada']; ?>
+      </td>
+
+      <td>
+        <i class="fas fa-trash-alt fa-lg text-danger" 
+        onclick="remover(<?php echo $gastos['id'] ?>)";>
+        </i>
+      </td>
+      
     </tr>
     <?php $i++; }; ?>
   </tbody>

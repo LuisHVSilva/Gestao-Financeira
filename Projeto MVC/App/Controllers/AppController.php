@@ -10,6 +10,13 @@
             session_start();
 
             if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){
+                
+                $gasto = Container::getModel('Gastos');
+
+                $gasto->__set('id_usuario', $_SESSION['id']);                
+                $this->view->gastos =  $gasto->Alguns();
+
+                
                 $this->render('entrada', 'layout');
                 
             }else{
@@ -59,7 +66,24 @@
             }            
         }
 
-        
+        //excluir gastos
+        public function excluir(){
+            session_start();
+
+            if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){                
+                
+                $gastos = Container::getModel('Gastos');                                
+                $gastos->__set('id', $_GET['id']);                  
+                
+                $gastos->delete();
+
+                header('Location: /tabela');
+                
+            }else{
+                header('Location: /?login=erro');
+            }            
+        }
+                
 
     }
 ?>

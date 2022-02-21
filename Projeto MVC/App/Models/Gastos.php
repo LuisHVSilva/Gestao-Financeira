@@ -50,7 +50,8 @@
         public function getAll(){
             $query = '
             SELECT 
-                tg.descricao
+                tg.id
+                , tg.descricao
                 , tg.valor
                 , tt.descricao as tipo
                 , DATE_FORMAT(tg.data, "%d/%m/%Y") as data                                
@@ -61,7 +62,8 @@
             where 
                 tg.id_usuario = :id_usuario
             order by
-            tg.data';
+            tg.data DESC,
+            tg.id DESC';
 
             $stmt= $this->db->prepare($query);
             $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
@@ -69,6 +71,40 @@
 
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
+
+        //Recuperar gastos por tipo
+        public function Alguns(){
+            $query = '
+            SELECT                                 
+                SUM(valor) as valor
+            from 
+                tb_gastos                       
+            where 
+                id_usuario = :id_usuario
+                
+            GROUP BY
+            tipo'
+            ;
+
+            $stmt= $this->db->prepare($query);
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            //$stmt->bindValue(':tipo', $tipo);
+            $stmt->execute();
+
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }
+
+        //Excluir gastos
+        public function delete(){
+            $query = 'delete from tb_gastos where id = :id';
+            
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id', $this->__get('id'));            
+            $stmt->execute();
+
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }        
 
     }
 

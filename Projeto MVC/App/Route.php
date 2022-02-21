@@ -48,6 +48,7 @@
                 'action' => 'entrada' 
             );
 
+
             $routes['gastos'] = array(
                 'route' => '/gastos',
                 'controller' => 'AppController', //Conteúdo para usuário
@@ -58,6 +59,12 @@
                 'route' => '/tabela',
                 'controller' => 'AppController', //Conteúdo para usuário
                 'action' => 'tabela' 
+            );
+
+            $routes['excluir'] = array(
+                'route' => '/excluir',
+                'controller' => 'AppController', //Conteúdo para usuário
+                'action' => 'excluir' 
             );
             //Adicionando os atributos array criados acima na variável privada routes
             $this->setRoutes($routes);
