@@ -19,6 +19,7 @@ header{
 
 #titulo{
     border-bottom: 1px solid white;
+    color: rgb(243, 66, 96);
 }
 
 main{
@@ -43,4 +44,28 @@ main{
 
 #entrada{
     color: pink
+}
+
+mark{
+    background-color: gray;
+    border-radius: 4%;
+}
+
+
+h5{
+    color: rgb(243, 66, 96);
+    font-weight: bolder;
+}
+
+.card{
+    border: 1px solid rgb(255, 0, 43);    
+}
+
+.card p{
+    color: black;
+    font-weight: bold;
+}
+
+#formulario{
+    color: rgb(226, 141, 155);
 }

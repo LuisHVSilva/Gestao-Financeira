@@ -63,6 +63,7 @@
                 tg.id_usuario = :id_usuario
             order by
             tg.data DESC,
+            tg.tipo,
             tg.id DESC';
 
             $stmt= $this->db->prepare($query);
