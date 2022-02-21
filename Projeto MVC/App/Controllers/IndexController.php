@@ -10,7 +10,7 @@
        
         public function index(){
 
-            //caso houver um erro de autentificação, o parâmetro será definido como 'erro' ($get[lgin]), caso foi sucesso, não haverá parâmetro
+            //caso houver um erro de autentificação, o parâmetro será definido como 'erro' ($get[login]), caso foi sucesso, não haverá parâmetro
             $this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
             
             //Chamando o conteudo da página que deverá ser acessado pelo index.

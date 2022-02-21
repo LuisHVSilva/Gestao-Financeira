@@ -1,12 +1,16 @@
 <div class="container mt-5">
 
-    <?php if($this->view->login == 'erro'){ ?>
-		<div class="row">
-			<div class="col">
-				<span class="text text-danger">E-mail ou senha inválido(s)</span>
-			</div>
-		</div>
-		<?php }; ?>
+    <?php if (empty($this->view->login)) { ?>
+        <div class="row">
+            <div class="col">
+                <span class="text text-success">Bem vindo</span>
+            </div>
+        </div>
+    <?php } else if(($this->view->login == 'erro')) { ?>        
+        <span class="text text-danger">E-mail ou senha inválido(s)</span>
+    <?php }; ?>
+
+
 
     <div class="row border-bottom border-top border-light mb-5" id="topo">
 
@@ -29,41 +33,20 @@
                     <button class="btn btn-outline-light" style="color: pink">
                         Entrar
                     </button>
-                    
+
                 </div>
             </form>
 
-                        <a href="/inscreverse" id="topo">Inscrever-se</a>
-                    
+            <a href="/inscreverse" id="topo">
+                <button class="btn btn-outline-light">
+                    Inscrever-se
+                </button>
+            </a>
+
 
         </div>
 
     </div>
 
-    <main>
-        <p class="border-bottom border-light">
-            Não sabe para onde seu dinheiro ta indo? Tem aquela sensação de que trabalha, trabalha e trabalha, mas nunca tem a segurança da reserva de emergência ou dinheiro para conseguir luxos e diversões? É, mexer com dinheiro não é tão fácil quanto parece...
-            <br>
-            Aqui, com apenas um celular e internet, você poderá começar a registrar cada gasto seu diário, desda balinha à contas fixas, encontrando, por fim, onde está o buraco negro que puxa seu dinheiro e não deixa nenhum <i>tostão</i> para guardar.
-            <br>
-            Tá tá, muitas promessas mas pouca ação. Bem, estou te oferencendo uma das diversas ferramentas que existem para gerenciar seus gastos, suas economias, seus sonhos, porém efetuar cabe a você.
-            <br>
-            Então mão na massa, depois de saber o que está acontecendo, o que deve ser feito depende de você e o quanto deseja concretizar uma melhoria monetária na sua vida.
-        </p>
 
-        <div class="row mt-5">
-            <p class="h3 text-center mb-3">Alguns conteúdos...</p>
-            <div class="col-md-4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores minus similique est perferendis, placeat, magnam aut dolore soluta, quam omnis labore repellat. Aut, adipisci minus dolore facere placeat voluptatem debitis.
-            </div>
-
-            <div class="col-md-4">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde similique vitae vel maiores possimus quo quisquam doloremque quaerat dicta. Qui maxime reiciendis in nisi neque ipsa debitis, perferendis illo quis!
-            </div>
-
-            <div class="col-md-4">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. In deleniti laboriosam, quae nobis iure nostrum reiciendis. Consequatur quia ducimus quibusdam vitae, dignissimos molestiae. Neque delectus, quasi libero animi repellendus quod.
-            </div>
-        </div>
-    </main>
 </div>

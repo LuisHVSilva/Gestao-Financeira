@@ -1,5 +1,57 @@
 <div class="container mt-5">
 
-   <h2>Deu bom</h2>
+   <div class="row">
+      <div class="col-md-4">
+         <p class="h3 text-center">Fixos</p>
+         <p class="text-center">200,00</p>
+      </div>
+      <div class="col-md-4">
+         <p class="h3 text-center">Variados</p>
+         <p class="text-center">300,00</p>
+      </div>
+      <div class="col-md-4">
+         <p class="h3 text-center">Total</p>
+         <p class="text-center">500,00</p>
+      </div>
+   </div>
+
    
+   <div class="row mt-5">
+      <div class="col-md-12 pt-4 pl-5 pr-5">
+         <p class="h3 text-center">Adicionar Gastos</p>
+         
+         <form method="post" action="/gastos">
+            <div class="row">
+               <div class="col-md-4">
+                  <p>Descrição</p>
+                  <input type="text" class="form-control" name="descricao">
+               </div>
+
+               <div class="col-md-4">                  
+                  <p>Valor</p>
+                  <input type="number" step="0.01" class="form-control" name="valor">
+               </div>
+
+               <div class="col-md-4">
+                  <p>Tipo</p>
+                  <select class="form-select" name="tipo">
+                     <option></option>
+                     <option value="1">Fixo</option>
+                     <option value="2">Variado</option>
+                  </select>                  
+               </div>  
+
+               <div class="col-md-4 mt-2">
+                  <p>Data</p>
+                  <input type="date" class="form-control" name="data">
+               </div>             
+            
+               <div class="col-auto mt-2">
+                  <p>Pronto para registro</p>
+                  <button class="btn btn-primary" type="submit">Registrar</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
 </div>

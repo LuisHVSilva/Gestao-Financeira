@@ -48,6 +48,17 @@
                 'action' => 'entrada' 
             );
 
+            $routes['gastos'] = array(
+                'route' => '/gastos',
+                'controller' => 'AppController', //Conteúdo para usuário
+                'action' => 'gastos' 
+            );
+
+            $routes['tabela'] = array(
+                'route' => '/tabela',
+                'controller' => 'AppController', //Conteúdo para usuário
+                'action' => 'tabela' 
+            );
             //Adicionando os atributos array criados acima na variável privada routes
             $this->setRoutes($routes);
         }
