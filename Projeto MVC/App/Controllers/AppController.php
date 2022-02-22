@@ -61,11 +61,7 @@
                 $geral = Container::getModel('Gastos');
                 $geral->__set('id_usuario', $_SESSION['id']);
                 $this->view->geral = $geral->alguns();
-                
-                $ajax = Container::getModel('Gastos');
-                $ajax->__set('id_usuario', $_SESSION['id']);
-                $this->view->ajax = $ajax->ajax();
-
+                              
                 $this->render('dashboard', 'layout');
                 
             }else{

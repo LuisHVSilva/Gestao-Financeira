@@ -72,6 +72,12 @@
                 'controller' => 'AppController', //Conteúdo para usuário
                 'action' => 'dashboard' 
             );
+            
+            $routes['dados'] = array(
+                'route' => '/dados',
+                'controller' => 'DadosController', //Conteúdo para usuário
+                'action' => 'dados' 
+            );
             //Adicionando os atributos array criados acima na variável privada routes
             $this->setRoutes($routes);
         }

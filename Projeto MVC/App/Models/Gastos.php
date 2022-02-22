@@ -122,8 +122,8 @@
                 $result[] = $results;
             };
             
+            echo json_encode($result);
             
-            return json_encode($result);
         }
 
 
