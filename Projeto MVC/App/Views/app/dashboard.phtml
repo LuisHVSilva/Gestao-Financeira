@@ -1,0 +1,75 @@
+<div class="container-fluid" style="color:white">
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Gastos Fixos</h5>
+                    <p class="text-center mt-2 mb-1">
+                        <?php
+                        echo 'R$' . ($this->view->geral[0]['valor']);
+                        ?>
+                    </p>
+                    <p class="card-text text-center"><small class="text-muted">Contas mensais</small></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Gastos Variados</h5>
+                    <p class="text-center mt-2 mb-1">
+                        <?php
+                        echo 'R$' . ($this->view->geral[1]['valor']);
+                        ?>
+                    </p>
+                    <p class="card-text text-center"><small class="text-muted">Lazer</small></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Total</h5>
+                    <p class="text-center mt-2 mb-1">
+                        <?php
+                        echo 'R$' . (($this->view->geral[0]['valor']) + ($this->view->geral[1]['valor']));
+                        ?>
+                    </p>
+                    <p class="card-text text-center"><small class="text-muted">Gasto Mensal</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+    <?php /* foreach ($this->view->gastos as $id_gastos => $gastos) {
+        echo '<pre>';
+        print_r($gastos);
+        echo '</pre>';
+    }; */?>
+    <hr>
+    </div>
+
+    <?php /*foreach ($this->view->geral as $id_gastos => $gastos) {
+        echo '<pre>';
+        print_r($gastos);
+        echo '</pre>';
+    }; */?>
+
+
+
+    <?php print_r($this->view->ajax);?>
+<!--
+<div class="container">
+  <canvas id="myChart"></canvas>
+</div>
+-->
+
+
+
+</div>

@@ -74,7 +74,7 @@
         }
 
         //Recuperar gastos por tipo
-        public function Alguns(){
+        public function alguns(){
             $query = '
             SELECT                                 
                 SUM(valor) as valor
@@ -94,6 +94,38 @@
 
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
+
+        public function ajax(){
+            $query = '
+            SELECT 
+                tg.id
+                , tg.descricao
+                , tg.valor
+                , tt.descricao as tipo
+                , DATE_FORMAT(tg.data, "%d/%m/%Y") as data                                
+                , DATE_FORMAT(tg.data_gravada , "%d/%m/%Y") as data_gravada
+            from 
+                tb_gastos as tg      
+                left join tb_tipos as tt on (tg.tipo = tt.id)
+            where 
+                tg.id_usuario = :id_usuario
+            order by
+            tg.data DESC,
+            tg.tipo,
+            tg.id DESC';
+
+            $stmt= $this->db->prepare($query);
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->execute();
+
+            while($results = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $result[] = $results;
+            };
+            
+            
+            return json_encode($result);
+        }
+
 
         //Excluir gastos
         public function delete(){

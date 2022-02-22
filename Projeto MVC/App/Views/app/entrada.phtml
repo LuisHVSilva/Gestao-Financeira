@@ -35,11 +35,7 @@
                <h5 class="card-title text-center">Total</h5>
                <p class="text-center mt-2 mb-1">
                   <?php
-                  $total = 0;
-                  foreach ($this->view->gastos as $key => $gastos) {
-                     $total += $gastos['valor'];
-                  }
-                  echo 'R$'.$total;
+                  echo 'R$' . (($this->view->gastos[0]['valor']) + ($this->view->gastos[1]['valor']));
                   ?>
                </p>
                <p class="card-text text-center"><small class="text-muted">Soma de tudo</small></p>

@@ -41,25 +41,27 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Dashboard</a>
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Gráfico</a>
-                        </li>
-                        
                         <li class="nav-item">
                             <a class="nav-link" href="/sair">Sair</a>
                         </li>
 
                     </ul>
-                </div>    
-      
+                </div>
+
             </nav>
         </div>
     </header>
     <!--Fim header-->
+
     <?php $this->content(); ?>
+
+    <!--Link do javascript para o gráfico-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

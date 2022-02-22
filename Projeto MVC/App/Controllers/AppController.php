@@ -6,6 +6,7 @@
 
     class AppController extends Action{
 
+        //Entrar na página entrada
         public function entrada(){                        
             session_start();
 
@@ -14,7 +15,7 @@
                 $gasto = Container::getModel('Gastos');
 
                 $gasto->__set('id_usuario', $_SESSION['id']);                
-                $this->view->gastos =  $gasto->Alguns();
+                $this->view->gastos =  $gasto->alguns();
 
                 
                 $this->render('entrada', 'layout');
@@ -25,6 +26,7 @@
             
         }
 
+        //Entrar na página tabela
         public function tabela(){                        
             session_start();
 
@@ -37,6 +39,34 @@
                 $gasto->__set('id_usuario', $_SESSION['id']);                
                 $this->view->gastos =  $gasto->getAll();
                 $this->render('tabela', 'layout');
+
+            }else{
+                header('Location: /?login=erro');
+            }
+            
+        }
+
+        //Entrar na página dashboard
+        public function dashboard(){                        
+            session_start();
+
+            if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){
+
+                //Recuperação dos gastos
+
+                $gasto = Container::getModel('Gastos');
+                $gasto->__set('id_usuario', $_SESSION['id']);                
+                $this->view->gastos =  $gasto->getAll();
+
+                $geral = Container::getModel('Gastos');
+                $geral->__set('id_usuario', $_SESSION['id']);
+                $this->view->geral = $geral->alguns();
+                
+                $ajax = Container::getModel('Gastos');
+                $ajax->__set('id_usuario', $_SESSION['id']);
+                $this->view->ajax = $ajax->ajax();
+
+                $this->render('dashboard', 'layout');
                 
             }else{
                 header('Location: /?login=erro');
@@ -83,6 +113,7 @@
                 header('Location: /?login=erro');
             }            
         }
+
                 
 
     }

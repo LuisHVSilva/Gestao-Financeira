@@ -66,6 +66,12 @@
                 'controller' => 'AppController', //Conteúdo para usuário
                 'action' => 'excluir' 
             );
+
+            $routes['dashboard'] = array(
+                'route' => '/dashboard',
+                'controller' => 'AppController', //Conteúdo para usuário
+                'action' => 'dashboard' 
+            );
             //Adicionando os atributos array criados acima na variável privada routes
             $this->setRoutes($routes);
         }
