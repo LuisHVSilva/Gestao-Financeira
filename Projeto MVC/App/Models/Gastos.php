@@ -62,9 +62,7 @@
             where 
                 tg.id_usuario = :id_usuario
             order by
-            tg.data DESC,
-            tg.tipo,
-            tg.id DESC';
+            tg.data DESC';
 
             $stmt= $this->db->prepare($query);
             $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
@@ -77,11 +75,13 @@
         public function alguns(){
             $query = '
             SELECT                                 
-                SUM(valor) as valor
+                SUM(valor) as valor,
+                tipo
             from 
                 tb_gastos                       
             where 
-                id_usuario = :id_usuario
+                id_usuario = :id_usuario AND
+                Month(data) = :mes
                 
             GROUP BY
             tipo'
@@ -89,6 +89,7 @@
 
             $stmt= $this->db->prepare($query);
             $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->bindValue(':mes', date('m'));
             //$stmt->bindValue(':tipo', $tipo);
             $stmt->execute();
 
@@ -108,14 +109,14 @@
                 tb_gastos as tg      
                 left join tb_tipos as tt on (tg.tipo = tt.id)
             where 
-                tg.id_usuario = :id_usuario
+                tg.id_usuario = :id_usuario AND
+                Month(tg.data) = :mes
             order by
-            tg.data DESC,
-            tg.tipo,
-            tg.id DESC';
+            tg.data ASC';
 
             $stmt= $this->db->prepare($query);
             $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->bindValue(':mes', date('m'));
             $stmt->execute();
 
             while($results = $stmt->fetch(\PDO::FETCH_ASSOC)){

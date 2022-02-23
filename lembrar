@@ -1,0 +1,45 @@
+
+
+        <div class="col-12 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Gastos Variados</h5>
+                    <p class="text-center mt-2 mb-1">
+                        <?php
+                        if (!empty($this->view->geral) && ($this->view->geral[0]['tipo'] == 2)) {
+                            echo 'R$' . ($this->view->geral[0]['valor']);
+                        } else if (!empty($this->view->geral[1])) {
+                            echo 'R$' . ($this->view->geral[1]['valor']);
+                        } else {
+                            echo 'Sem dados';
+                        }
+
+                        ?>
+                    </p>
+                    <p class="card-text text-center"><small class="text-muted">Lazer</small></p>
+                </div>
+            </div>
+            <canvas id="myChart2"></canvas>
+        </div>
+
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Total</h5>
+                    <p class="text-center mt-2 mb-1">
+                        <?php
+                        if (!empty($this->view->geral[0]) && !empty($this->view->geral[1])) {
+                            echo 'R$' . (($this->view->geral[0]['valor']) + ($this->view->geral[1]['valor']));
+                        } else if (!empty($this->view->geral[0]) && empty($this->view->geral[1])) {
+                            echo 'R$' . ($this->view->geral[0]['valor']);
+                        } else if (empty($this->view->geral[0]) && !empty($this->view->geral[1])) {
+                            echo 'R$' . ($this->view->geral[1]['valor']);
+                        } else {
+                            echo 'Sem dados';
+                        }
+                        ?>
+                    </p>
+                    <p class="card-text text-center"><small class="text-muted">Gasto Mensal</small></p>
+                </div>
+            </div>
+        </div>

@@ -49,10 +49,10 @@
             );
 
 
-            $routes['gastos'] = array(
-                'route' => '/gastos',
+            $routes['salvar'] = array(
+                'route' => '/salvar',
                 'controller' => 'AppController', //Conteúdo para usuário
-                'action' => 'gastos' 
+                'action' => 'salvar' 
             );
 
             $routes['tabela'] = array(

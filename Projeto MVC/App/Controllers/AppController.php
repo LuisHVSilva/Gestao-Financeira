@@ -5,7 +5,8 @@
     use MF\Model\Container;
 
     class AppController extends Action{
-
+        
+        //Action de página
         //Entrar na página entrada
         public function entrada(){                        
             session_start();
@@ -26,6 +27,7 @@
             
         }
 
+        //Action de página
         //Entrar na página tabela
         public function tabela(){                        
             session_start();
@@ -46,21 +48,22 @@
             
         }
 
+        //Action de página
         //Entrar na página dashboard
         public function dashboard(){                        
             session_start();
 
             if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){
 
-                //Recuperação dos gastos
-
-                $gasto = Container::getModel('Gastos');
-                $gasto->__set('id_usuario', $_SESSION['id']);                
-                $this->view->gastos =  $gasto->getAll();
-
+                //Recuperação dos gastos somados do mês
                 $geral = Container::getModel('Gastos');
                 $geral->__set('id_usuario', $_SESSION['id']);
                 $this->view->geral = $geral->alguns();
+
+                //Recuperando todos os gastos
+                $gastos = Container::getModel('Gastos');
+                $gastos->__set('id_usuario', $_SESSION['id']);
+                $this->view->gastos = $gastos->getAll();
                               
                 $this->render('dashboard', 'layout');
                 
@@ -70,8 +73,9 @@
             
         }
 
+        //Action de Banco de Dados
         //Salvar gastos
-        public function gastos(){
+        public function salvar(){
             session_start();
 
             if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){                
@@ -92,6 +96,7 @@
             }            
         }
 
+        //Action de Banco de Dados
         //excluir gastos
         public function excluir(){
             session_start();

@@ -1,57 +1,84 @@
-<div class="container-fluid" style="color:white">
+<div class="container mt-5" style="color:white">
 
+    <div class="row mt-5">
+        <h3 class=""><?php
+                        switch (date('m')) {
+                            case '01':
+                                $mes = 'Janeiro';
+                                break;
+                            case '02':
+                                $mes = 'Fevereiro';
+                                break;
+                            case '03':
+                                $mes = 'Março';
+                                break;
+                            case '04':
+                                $mes = 'Abril';
+                                break;
+                            case '05':
+                                $mes = 'Maio';
+                                break;
+                            case '06':
+                                $mes = 'Junho';
+                                break;
+                            case '07':
+                                $mes = 'Julho';
+                                break;
+                            case '08':
+                                $mes = 'Agosto';
+                                break;
+                            case '09':
+                                $mes = 'Setembro';
+                                break;
+                            case '10':
+                                $mes = 'Outubro';
+                                break;
+                            case '11':
+                                $mes = 'Novembro';
+                                break;
+                            case '12':
+                                $mes = 'Dezembro';
+                        };
 
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Gastos Fixos</h5>
-                    <p class="text-center mt-2 mb-1">
-                        <?php
-                        echo 'R$' . ($this->view->geral[0]['valor']);
+                        echo 'Mês Atual: ' . $mes;
                         ?>
-                    </p>
-                    <p class="card-text text-center"><small class="text-muted">Contas mensais</small></p>
-                </div>
-            </div>
+        </h3>
+        <div class="col-6 mt-4">
+            <h5 class="">Gastos Fixos</h5>
+            <p class="mt-2 mb-1">
+                Gasto total:
+                <?php
+                if (!empty($this->view->geral) && ($this->view->geral[0]['tipo'] == 1)) {
+                    echo 'R$' . ($this->view->geral[0]['valor']);
+                } else {
+                    echo 'Sem dados';
+                }
+                ?>
+            </p>
+            <p>Maior gasto: <?php
+                            $maximo = 0;
+                            if(!empty($this->view->gastos)){
+                                foreach ($this->view->gastos as $key => $gastos) {
+                                    if (intval($gastos['valor']) > $maximo) {
+                                        $maximo = $gastos['valor'];
+                                        $descricao = $gastos['descricao'];
+                                    }
+                                }
+                                echo $maximo .' em '. $descricao;
+                            } else {
+                                echo 'Sem dados';
+                            }                            
+                            ?></p>
+        </div>
+        <div class="col-md-6 mt-4">
+            <canvas id="myChart1"></canvas>
         </div>
 
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Gastos Variados</h5>
-                    <p class="text-center mt-2 mb-1">
-                        <?php
-                        echo 'R$' . ($this->view->geral[1]['valor']);
-                        ?>
-                    </p>
-                    <p class="card-text text-center"><small class="text-muted">Lazer</small></p>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Total</h5>
-                    <p class="text-center mt-2 mb-1">
-                        <?php
-                        echo 'R$' . (($this->view->geral[0]['valor']) + ($this->view->geral[1]['valor']));
-                        ?>
-                    </p>
-                    <p class="card-text text-center"><small class="text-muted">Gasto Mensal</small></p>
-                </div>
-            </div>
-        </div>
     </div>
-
-    <div>
-<!--        
-<div class="container">
-  <canvas id="myChart"></canvas>
 </div>
--->
 
 
+<div class="container" style="color: white;">
 
 </div>
