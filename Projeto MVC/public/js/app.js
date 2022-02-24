@@ -1,38 +1,39 @@
-$('document').ready(function() {
-    $('document').ready(function(){
+$('document').ready(function () {
+    $('document').ready(function () {
         $.ajax({
             type: "POST",
             url: "/dados",
             dataType: "json",
-            success: function(data){
+            success: function (data) {
 
                 var fixo = [];
                 var variado = [];
                 var data_fixo = []
                 var data_variado = []
-                
-                for(var i = 0; i < data.length; i++){
-                    if(data[i].tipo == 'Fixo'){
-                        fixo.push(data[i].valor)  
-                        data_fixo.push(parseInt(data[i].data.substr(0, 2)))  
-                    }else {
-                        variado.push(data[i].valor)    
+
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].tipo == 'Fixo') {
+                        fixo.push(data[i].valor)
+                        data_fixo.push(parseInt(data[i].data.substr(0, 2)))
+                    } else {
+                        variado.push(data[i].valor)
                         data_variado.push(parseInt(data[i].data.substr(0, 2)))
-                    };                    
-                                                                                
+                    };
+
                 }
-                
+
                 //
                 grafico1(fixo, data_fixo)
                 grafico2(variado, data_variado)
-                
+                grafico3()
+
             }
-            
+
         })
     })
 })
 
-function grafico1(fixo, data_fixo){
+function grafico1(fixo, data_fixo) {
     const labels = data_fixo;
 
     const data = {
@@ -41,7 +42,7 @@ function grafico1(fixo, data_fixo){
             label: 'Fixo',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: fixo,        
+            data: fixo,
         }]
     };
 
@@ -57,7 +58,7 @@ function grafico1(fixo, data_fixo){
     );
 }
 
-function grafico2(variado, data_variado){
+function grafico2(variado, data_variado) {
     const labels = data_variado;
 
     const data = {
@@ -66,7 +67,7 @@ function grafico2(variado, data_variado){
             label: 'Variado',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: variado,        
+            data: variado,
         }]
     };
 
@@ -78,6 +79,36 @@ function grafico2(variado, data_variado){
 
     const myChart = new Chart(
         document.getElementById('myChart2'),
+        config
+    );
+}
+
+function grafico3(variado, data_variado) {
+    const labels = data_variado;
+
+    const data = {
+        labels: [1, 2, 3, 4, 5],
+        datasets: [{
+            label: 'Variado',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [10, 20, 30, 40, 50],
+        },
+        {
+        label: 'Fixo',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [1, 2, 3, 4, 5],}]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart3'),
         config
     );
 }

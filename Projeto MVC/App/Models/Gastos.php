@@ -62,7 +62,8 @@
             where 
                 tg.id_usuario = :id_usuario
             order by
-            tg.data DESC';
+            DATE_FORMAT(tg.data, "%d/%m/%Y") DESC,
+            tg.tipo';
 
             $stmt= $this->db->prepare($query);
             $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));

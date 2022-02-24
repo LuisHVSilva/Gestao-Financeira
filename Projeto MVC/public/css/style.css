@@ -1,3 +1,4 @@
+/*Estrutura de todas as páginas*/
 body{
     background-color: black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -7,11 +8,44 @@ header{
     color: pink;
 }
 
+
+main{
+    color: snow;
+}
+
+
+
+/*Estrura de tags*/
+
 #topo{
     text-decoration: none;
     color: pink;
 }
 
+mark{
+    background-color: gray;
+    border-radius: 4%;
+}
+
+
+h5{
+    color: rgb(243, 66, 96);
+    font-weight: bolder;
+}
+
+
+/*Estrutura de classes*/
+
+.card{
+    border: 1px solid rgb(255, 0, 43);    
+}
+
+.card p{
+    color: black;
+    font-weight: bold;
+}
+
+/*Estrutura de id*/
 #card{
     border: 1px solid red;
     margin-left: 2px;
@@ -21,11 +55,6 @@ header{
     border-bottom: 1px solid white;
     color: rgb(243, 66, 96);
 }
-
-main{
-    color: snow;
-}
-
 
 #entrar-form input,
 #inscreverse-form input{
@@ -46,26 +75,17 @@ main{
     color: pink
 }
 
-mark{
-    background-color: gray;
-    border-radius: 4%;
-}
-
-
-h5{
-    color: rgb(243, 66, 96);
-    font-weight: bolder;
-}
-
-.card{
-    border: 1px solid rgb(255, 0, 43);    
-}
-
-.card p{
-    color: black;
-    font-weight: bold;
-}
-
 #formulario{
     color: rgb(226, 141, 155);
+}
+
+/*Página -> dashboard.phtml*/
+/*
+->Estrutura id
+*/
+
+#grafico{
+    border: 1px solid rgba(266, 141, 155, .9);
+    box-shadow: 5px 7px rgba(266, 141, 155, .5);
+    border-radius: 1%;
 }
