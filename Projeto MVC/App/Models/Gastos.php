@@ -1,54 +1,60 @@
-<?php 
-    namespace App\Models;
+<?php
 
-    //Classe responsável por conectar ao banco de dados
-    use MF\Model\Model;
+namespace App\Models;
 
-    class Gastos extends Model{
-        
-        //Criando atributos privados que representam as colunas do banco de dados
-        private $id;
-        private $id_usuario;
-        private $descricao;
-        private $valor;
-        private $tipo;
-        private $data;
+//Classe responsável por conectar ao banco de dados
+use MF\Model\Model;
 
-        //Como os atributos são privados, necessário usar os métodos get e set para poder usá-los e mudá-los
-        public function __get($name){
-        
-            return $this->$name;    
-        }
+class Gastos extends Model
+{
 
-        public function __set($name, $value){
-        
-            $this->$name = $value;
-        }
+    //Criando atributos privados que representam as colunas do banco de dados
+    private $id;
+    private $id_usuario;
+    private $descricao;
+    private $valor;
+    private $tipo;
+    private $data;
 
-        //Salvar novos gastos
-        public function salvar(){
-            //Query sql para inserir gastos
-            $query = "insert into tb_gastos(id_usuario, descricao, valor, tipo, data) values(:id_usuario,:descricao,:valor,:tipo,:data);";
+    //Como os atributos são privados, necessário usar os métodos get e set para poder usá-los e mudá-los
+    public function __get($name)
+    {
 
-            //Criando o PreparetStatment (Preparando conexão)
-            $stmt = $this->db->prepare($query);
+        return $this->$name;
+    }
 
-            //Atribuindo dinâmicamente os valores variados
-            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-            $stmt->bindValue(':descricao', $this->__get('descricao'));
-            $stmt->bindValue(':valor', $this->__get('valor')); 
-            $stmt->bindValue(':tipo', $this->__get('tipo')); 
-            $stmt->bindValue(':data', $this->__get('data')); 
-            //executando o comando sql
-            $stmt->execute();
+    public function __set($name, $value)
+    {
 
-            //returnonando
-            return $this;
-        }
+        $this->$name = $value;
+    }
 
-        //Recuperar gastos
-        public function getAll(){
-            $query = '
+    //Salvar novos gastos
+    public function salvar()
+    {
+        //Query sql para inserir gastos
+        $query = "insert into tb_gastos(id_usuario, descricao, valor, tipo, data) values(:id_usuario,:descricao,:valor,:tipo,:data);";
+
+        //Criando o PreparetStatment (Preparando conexão)
+        $stmt = $this->db->prepare($query);
+
+        //Atribuindo dinâmicamente os valores variados
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+        $stmt->bindValue(':descricao', $this->__get('descricao'));
+        $stmt->bindValue(':valor', $this->__get('valor'));
+        $stmt->bindValue(':tipo', $this->__get('tipo'));
+        $stmt->bindValue(':data', $this->__get('data'));
+        //executando o comando sql
+        $stmt->execute();
+
+        //returnonando
+        return $this;
+    }
+
+    //Recuperar gastos
+    public function getAll()
+    {
+        $query = '
             SELECT 
                 tg.id
                 , tg.descricao
@@ -65,16 +71,17 @@
             DATE_FORMAT(tg.data, "%d/%m/%Y") DESC,
             tg.tipo';
 
-            $stmt= $this->db->prepare($query);
-            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-            $stmt->execute();
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+        $stmt->execute();
 
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        }
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
-        //Recuperar gastos por tipo
-        public function alguns(){
-            $query = '
+    //Recuperar gastos por tipo
+    public function alguns()
+    {
+        $query = '
             SELECT                                 
                 SUM(valor) as valor,
                 tipo
@@ -85,62 +92,90 @@
                 Month(data) = :mes
                 
             GROUP BY
-            tipo'
-            ;
+            tipo';
 
-            $stmt= $this->db->prepare($query);
-            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-            $stmt->bindValue(':mes', date('m'));
-            //$stmt->bindValue(':tipo', $tipo);
-            $stmt->execute();
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+        $stmt->bindValue(':mes', date('m'));
+        //$stmt->bindValue(':tipo', $tipo);
+        $stmt->execute();
 
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        }
-
-        public function ajax(){
-            $query = '
-            SELECT 
-                tg.id
-                , tg.descricao
-                , tg.valor
-                , tt.descricao as tipo
-                , DATE_FORMAT(tg.data, "%d/%m/%Y") as data                                
-                , DATE_FORMAT(tg.data_gravada , "%d/%m/%Y") as data_gravada
-            from 
-                tb_gastos as tg      
-                left join tb_tipos as tt on (tg.tipo = tt.id)
-            where 
-                tg.id_usuario = :id_usuario AND
-                Month(tg.data) = :mes
-            order by
-            tg.data ASC';
-
-            $stmt= $this->db->prepare($query);
-            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-            $stmt->bindValue(':mes', date('m'));
-            $stmt->execute();
-
-            while($results = $stmt->fetch(\PDO::FETCH_ASSOC)){
-                $result[] = $results;
-            };
-            
-            echo json_encode($result);
-            
-        }
-
-
-        //Excluir gastos
-        public function delete(){
-            $query = 'delete from tb_gastos where id = :id';
-            
-
-            $stmt = $this->db->prepare($query);
-            $stmt->bindValue(':id', $this->__get('id'));            
-            $stmt->execute();
-
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        }        
-
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-?>
+    public function ajax1()
+    {
+        $query = '
+        SELECT 
+            SUM(tg.valor) as valor
+            , tt.descricao as tipo
+            , DATE_FORMAT(tg.data, "%d/%m/%Y") as data                     
+            , DATE_FORMAT(tg.data_gravada , "%d/%m/%Y") as data_gravada
+        from 
+            tb_gastos as tg      
+            left join tb_tipos as tt on (tg.tipo = tt.id)
+        where 
+            tg.id_usuario = :id_usuario
+            AND Month(tg.data) = :mes
+        GROUP BY
+            tt.descricao
+            , DATE_FORMAT(tg.data, "%d/%m/%Y")
+            , DATE_FORMAT(tg.data_gravada , "%d/%m/%Y")
+        order by
+            tg.data ASC,
+            tt.descricao';
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+        $stmt->bindValue(':mes', date('m'));
+        $stmt->execute();
+
+        while ($results = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $result[] = $results;
+        };
+
+        echo json_encode($result);
+    }
+
+    public function ajax2()
+    {
+        $query = '
+        SELECT 
+            SUM(valor) as valor
+            , DATE_FORMAT(data, "%d/%m/%Y") as data
+        from 
+            tb_gastos            
+        where 
+            id_usuario = :id_usuario     
+            AND Month(data) = :mes       
+        group by
+            DATE_FORMAT(data, "%d/%m/%Y")
+        order by
+            data ASC';
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+        $stmt->bindValue(':mes', date('m'));
+        $stmt->execute();
+
+        while ($results = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $result[] = $results;
+        };
+
+        echo json_encode($result);
+    }
+
+
+    //Excluir gastos
+    public function delete()
+    {
+        $query = 'delete from tb_gastos where id = :id';
+
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id', $this->__get('id'));
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+}

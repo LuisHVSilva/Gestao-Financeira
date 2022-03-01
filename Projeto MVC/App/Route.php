@@ -73,10 +73,16 @@
                 'action' => 'dashboard' 
             );
             
-            $routes['dados'] = array(
-                'route' => '/dados',
+            $routes['dados_separado'] = array(
+                'route' => '/dados_separado',
                 'controller' => 'DadosController', //Conteúdo para usuário
-                'action' => 'dados' 
+                'action' => 'dados_separado' 
+            );
+
+            $routes['dados_geral'] = array(
+                'route' => '/dados_geral',
+                'controller' => 'DadosController', //Conteúdo para usuário
+                'action' => 'dados_geral' 
             );
             //Adicionando os atributos array criados acima na variável privada routes
             $this->setRoutes($routes);

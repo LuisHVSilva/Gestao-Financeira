@@ -1,48 +1,63 @@
 $('document').ready(function () {
+    
     $('document').ready(function () {
         $.ajax({
             type: "POST",
-            url: "/dados",
+            url: "/dados_separado",
             dataType: "json",
             success: function (data) {
 
                 var fixo = [];
                 var variado = [];
-                var data_fixo = []
-                var data_variado = []
-
+                var data_fixo = [];
+                var data_variado = [];
+                
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].tipo == 'Fixo') {
-                        fixo.push(data[i].valor)
-                        data_fixo.push(parseInt(data[i].data.substr(0, 2)))
+                    if (data[i].tipo == 'Fixo') {                        
+                        fixo.push(data[i].valor);
+                        data_fixo.push(parseInt(data[i].data.substr(0, 2)));
                     } else {
-                        variado.push(data[i].valor)
-                        data_variado.push(parseInt(data[i].data.substr(0, 2)))
-                    };
+                        variado.push(data[i].valor);
+                        data_variado.push(parseInt(data[i].data.substr(0, 2)));
+                    };                
+                };                                
 
-                }
-
-                //
-                grafico1(fixo, data_fixo)
-                grafico2(variado, data_variado)
-                grafico3()
+                grafico(fixo, data_fixo, 'Fixo', 1);
+                grafico(variado, data_variado, 'Variado', 2);
+                
 
             }
+
+        })
+
+        $.ajax({
+            type: "POST",
+            url: "/dados_geral",
+            dataType: "json",
+            success: function (data) {                
+                valor = []
+                date = []
+                for (var i = 0; i < data.length; i++) {
+                    valor.push(data[i].valor);
+                    date.push(parseInt(data[i].data.substr(0, 2)));
+                };                                
+                grafico(valor,date, 'Geral', 3)
+            }            
 
         })
     })
 })
 
-function grafico1(fixo, data_fixo) {
-    const labels = data_fixo;
+function grafico(valor, date, titulo, numero) {
+    const labels = date;
 
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Fixo',
+            label: titulo,
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: fixo,
+            data: valor,
         }]
     };
 
@@ -53,62 +68,7 @@ function grafico1(fixo, data_fixo) {
     };
 
     const myChart = new Chart(
-        document.getElementById('myChart1'),
-        config
-    );
-}
-
-function grafico2(variado, data_variado) {
-    const labels = data_variado;
-
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Variado',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: variado,
-        }]
-    };
-
-    const config = {
-        type: 'line',
-        data: data,
-        options: {}
-    };
-
-    const myChart = new Chart(
-        document.getElementById('myChart2'),
-        config
-    );
-}
-
-function grafico3(variado, data_variado) {
-    const labels = data_variado;
-
-    const data = {
-        labels: [1, 2, 3, 4, 5],
-        datasets: [{
-            label: 'Variado',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [10, 20, 30, 40, 50],
-        },
-        {
-        label: 'Fixo',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [1, 2, 3, 4, 5],}]
-    };
-
-    const config = {
-        type: 'line',
-        data: data,
-        options: {}
-    };
-
-    const myChart = new Chart(
-        document.getElementById('myChart3'),
+        document.getElementById('myChart'+numero),
         config
     );
 }
