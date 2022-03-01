@@ -57,15 +57,37 @@ function grafico(valor, date, titulo, numero) {
             label: titulo,
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: valor,
+            fill: false,
+            cubicInterpolationMode: 'monotone',
+            data: valor,            
         }]
     };
 
     const config = {
         type: 'line',
         data: data,
-        options: {}
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: false
+                },
+            },
+            interaction: {
+                intersect: false,
+            },
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Data',
+                    },
+                },
+            }
+        }
     };
+
 
     const myChart = new Chart(
         document.getElementById('myChart'+numero),

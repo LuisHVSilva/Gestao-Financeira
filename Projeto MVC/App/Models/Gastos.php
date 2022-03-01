@@ -103,69 +103,6 @@ class Gastos extends Model
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function ajax1()
-    {
-        $query = '
-        SELECT 
-            SUM(tg.valor) as valor
-            , tt.descricao as tipo
-            , DATE_FORMAT(tg.data, "%d/%m/%Y") as data                     
-            , DATE_FORMAT(tg.data_gravada , "%d/%m/%Y") as data_gravada
-        from 
-            tb_gastos as tg      
-            left join tb_tipos as tt on (tg.tipo = tt.id)
-        where 
-            tg.id_usuario = :id_usuario
-            AND Month(tg.data) = :mes
-        GROUP BY
-            tt.descricao
-            , DATE_FORMAT(tg.data, "%d/%m/%Y")
-            , DATE_FORMAT(tg.data_gravada , "%d/%m/%Y")
-        order by
-            tg.data ASC,
-            tt.descricao';
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-        $stmt->bindValue(':mes', date('m'));
-        $stmt->execute();
-
-        while ($results = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $result[] = $results;
-        };
-
-        echo json_encode($result);
-    }
-
-    public function ajax2()
-    {
-        $query = '
-        SELECT 
-            SUM(valor) as valor
-            , DATE_FORMAT(data, "%d/%m/%Y") as data
-        from 
-            tb_gastos            
-        where 
-            id_usuario = :id_usuario     
-            AND Month(data) = :mes       
-        group by
-            DATE_FORMAT(data, "%d/%m/%Y")
-        order by
-            data ASC';
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-        $stmt->bindValue(':mes', date('m'));
-        $stmt->execute();
-
-        while ($results = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $result[] = $results;
-        };
-
-        echo json_encode($result);
-    }
-
-
     //Excluir gastos
     public function delete()
     {

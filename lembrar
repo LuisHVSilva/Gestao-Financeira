@@ -1,34 +1,168 @@
+<?php
+$fixo = 0;
+$maximo_fixo = null;
+$descricao_fixo = null;
 
+$variado = 0;
+$maximo_variado = null;
+$descricao_variado = null;
 
+if (!empty($this->view->geral[0])) {
 
-<div class="container" style="color: white;">
-    <?php
+    if ($this->view->geral[0]['tipo'] == 1) {
+        $fixo = $this->view->geral[0]['valor'];
 
-
-    $i = count($this->view->gastos) - 1;
-    $data = $this->view->gastos[$i]['data'];
-    $dados = [];
-
-    function diferentes($data, $gastos)
-    {
-        $data = $gastos;
-        return $data;
-    }
-
-    $valor = [];
-    
-    foreach ($this->view->gastos as $key => $gastos) {
-        $a = [];
-        if ($gastos['data'] != $data) {
-            $data = diferentes($data, $gastos['data']);
-            //echo $data;
-
+        foreach ($this->view->gastos as $key => $gastos) {
+            if ($gastos['tipo'] == 'Fixo') {
+                if (intval($gastos['valor']) > $maximo_fixo) {
+                    $maximo_fixo = $gastos['valor'];
+                    $descricao_fixo = $gastos['descricao'];
+                }
+            }
         }
-        array_push($a, $data, $gastos['valor'], $gastos['tipo']);
-        array_push($valor, $a);
-                  
-    }
-    ?>
-</div>
 
-<canvas id="myChart1"></canvas>
+        if (!empty($this->view->geral[1])) {
+            $variado = $this->view->geral[1]['valor'];
+
+            foreach ($this->view->gastos as $key => $gastos) {
+
+                if ($gastos['tipo'] == 'Variado') {
+                    if (intval($gastos['valor']) > $maximo_variado) {
+
+                        $maximo_variado = $gastos['valor'];
+                        $descricao_variado = $gastos['descricao'];
+                    }
+                }
+            }
+        }
+    } else {
+        $variado = $this->view->geral[0]['valor'];
+        foreach ($this->view->gastos as $key => $gastos) {
+
+            if (intval($gastos['valor']) > $maximo_variado) {
+                $maximo_variado = $gastos['valor'];
+                $descricao_variado = $gastos['descricao'];
+            }
+        }
+    }
+} 
+?>
+
+
+<div class="container mt-5" style="color:white">
+
+    <h3 class=""><?php
+                    switch (date('m')) {
+                        case '01':
+                            $mes = 'Janeiro';
+                            break;
+                        case '02':
+                            $mes = 'Fevereiro';
+                            break;
+                        case '03':
+                            $mes = 'Março';
+                            break;
+                        case '04':
+                            $mes = 'Abril';
+                            break;
+                        case '05':
+                            $mes = 'Maio';
+                            break;
+                        case '06':
+                            $mes = 'Junho';
+                            break;
+                        case '07':
+                            $mes = 'Julho';
+                            break;
+                        case '08':
+                            $mes = 'Agosto';
+                            break;
+                        case '09':
+                            $mes = 'Setembro';
+                            break;
+                        case '10':
+                            $mes = 'Outubro';
+                            break;
+                        case '11':
+                            $mes = 'Novembro';
+                            break;
+                        case '12':
+                            $mes = 'Dezembro';
+                    };
+
+                    echo 'Mês Atual: ' . $mes;
+                    ?>
+    </h3>
+
+    <div class="row mt-3" id="grafico">
+        <div class="col-6">
+            <h5 class="">Gastos Fixos</h5>
+            <p class="mt-2 mb-1">
+                Gasto total:
+                <?php
+                if ($fixo != 0) {
+                    echo 'R$' . $fixo;
+                } else {
+                    echo 'Sem dados';
+                }
+                ?>
+            </p>
+            <p>Maior gasto: <?php
+                            if ($fixo != 0) {
+                                echo $maximo_fixo . ' em ' . $descricao_fixo;
+                            } else {
+                                echo 'Sem dados';
+                            }
+                            ?></p>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart1"></canvas>
+        </div>
+    </div>
+
+    <div class="row mt-3" id="grafico">
+        <div class="col-6">
+            <h5>Gastos Variados</h5>
+            <p>
+                Gasto total:
+                <?php
+                if ($variado != 0) {
+                    echo 'R$' . $variado;
+                } else {
+                    echo 'Sem dados';
+                }
+                ?>
+            </p>
+            <p>Maior gasto: <?php
+                            if ($variado != 0) {
+                                echo $maximo_variado . ' em ' . $descricao_variado;
+                            } else {
+                                echo 'Sem dados';
+                            }
+                            ?></p>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart2"></canvas>
+        </div>
+    </div>
+
+    <div class="row mt-3" id="grafico">
+        <div class="col-6">
+            <h5>Gastos Total</h5>
+            <p class="h4 text-center mt-5">
+                
+                <?php
+                if ($fixo != 0 ||$variado != 0) {
+                    echo 'R$' . $variado+$fixo;
+                } else {
+                    echo 'Sem dados';
+                }
+                ?>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart3"></canvas>
+        </div>
+    </div>
+
+
+</div>

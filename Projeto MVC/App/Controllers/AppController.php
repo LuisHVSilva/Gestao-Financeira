@@ -58,6 +58,7 @@
                 //Recuperação dos gastos somados do mês
                 $geral = Container::getModel('Gastos');
                 $geral->__set('id_usuario', $_SESSION['id']);
+                $geral->__set('mes', 2);
                 $this->view->geral = $geral->alguns();
 
                 //Recuperando todos os gastos

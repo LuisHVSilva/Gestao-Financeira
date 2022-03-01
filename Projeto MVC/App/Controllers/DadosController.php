@@ -12,8 +12,8 @@
             if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){
 
                 //Recuperação dos gastos                
-                $ajax = Container::getModel('Gastos');
-                $ajax->__set('id_usuario', $_SESSION['id']);
+                $ajax = Container::getModel('Dados');
+                $ajax->__set('id_usuario', $_SESSION['id']);                
                 $this->view->ajax = $ajax->ajax1();
 
                 $this->render('dados_separado', '');
@@ -30,8 +30,8 @@
             if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){
 
                 //Recuperação dos gastos                
-                $ajax = Container::getModel('Gastos');
-                $ajax->__set('id_usuario', $_SESSION['id']);
+                $ajax = Container::getModel('Dados');
+                $ajax->__set('id_usuario', $_SESSION['id']);                
                 $this->view->ajax = $ajax->ajax2();
 
                 $this->render('dados_geral', '');
@@ -41,5 +41,6 @@
             }
             
         }
+        
     }
 ?>
