@@ -14,7 +14,8 @@ class Gastos extends Model
     private $descricao;
     private $valor;
     private $tipo;
-    private $data;
+    private $data;    
+    private $mes;
 
     //Como os atributos são privados, necessário usar os métodos get e set para poder usá-los e mudá-los
     public function __get($name)
@@ -84,7 +85,7 @@ class Gastos extends Model
         $query = '
             SELECT                                 
                 SUM(valor) as valor,
-                tipo
+                tipo                
             from 
                 tb_gastos                       
             where 
@@ -96,7 +97,7 @@ class Gastos extends Model
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-        $stmt->bindValue(':mes', date('m'));
+        $stmt->bindValue(':mes', $this->__get('mes'));
         //$stmt->bindValue(':tipo', $tipo);
         $stmt->execute();
 

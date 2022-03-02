@@ -50,7 +50,7 @@ class Dados extends Model
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-        $stmt->bindValue(':mes', date('m'));
+        $stmt->bindValue(':mes', $this->__get('mes'));
         $stmt->execute();
 
         while ($results = $stmt->fetch(\PDO::FETCH_ASSOC)) {
@@ -78,14 +78,16 @@ class Dados extends Model
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
-        $stmt->bindValue(':mes', date('m'));
+        $stmt->bindValue(':mes', $this->__get('mes'));
         $stmt->execute();
 
         while ($results = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $result[] = $results;
         };
-
-        echo json_encode($result);
+        
+        echo json_encode($result, $this->__get('mes'));
     }
+
+    
 
 }

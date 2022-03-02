@@ -13,7 +13,8 @@
 
                 //Recuperação dos gastos                
                 $ajax = Container::getModel('Dados');
-                $ajax->__set('id_usuario', $_SESSION['id']);                
+                $ajax->__set('id_usuario', $_SESSION['id']); 
+                $ajax->__set('mes', $_SESSION['mes']);                
                 $this->view->ajax = $ajax->ajax1();
 
                 $this->render('dados_separado', '');
@@ -31,10 +32,14 @@
 
                 //Recuperação dos gastos                
                 $ajax = Container::getModel('Dados');
-                $ajax->__set('id_usuario', $_SESSION['id']);                
-                $this->view->ajax = $ajax->ajax2();
+                $ajax->__set('id_usuario', $_SESSION['id']); 
+                $ajax->__set('mes', $_SESSION['mes']);
 
+                
+                $this->view->ajax = $ajax->ajax2($ajax->__get('mes'));
                 $this->render('dados_geral', '');
+
+                
                 
             }else{
                 header('Location: /?login=erro');

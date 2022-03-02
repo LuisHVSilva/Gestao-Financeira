@@ -45,14 +45,19 @@ if (!empty($this->view->geral[0])) {
             }
         }
     }
-} 
+}
 ?>
 
 
 <div class="container mt-5" style="color:white">
 
     <h3 class=""><?php
-                    switch (date('m')) {
+                    if (empty($_POST)) {
+                        $mes = date('m');
+                    } else {
+                        $mes = $_POST['mes'];
+                    }
+                    switch ($mes) {
                         case '01':
                             $mes = 'Janeiro';
                             break;
@@ -90,7 +95,7 @@ if (!empty($this->view->geral[0])) {
                             $mes = 'Dezembro';
                     };
 
-                    echo 'Mês Atual: ' . $mes;
+                    echo $mes;
                     ?>
     </h3>
 
@@ -150,10 +155,10 @@ if (!empty($this->view->geral[0])) {
         <div class="col-6">
             <h5>Gastos Total</h5>
             <p class="h4 text-center mt-5">
-                
+
                 <?php
-                if ($fixo != 0 ||$variado != 0) {
-                    echo 'R$' . $variado+$fixo;
+                if ($fixo != 0 || $variado != 0) {
+                    echo 'R$' . $variado + $fixo;
                 } else {
                     echo 'Sem dados';
                 }
@@ -162,6 +167,32 @@ if (!empty($this->view->geral[0])) {
         <div class="col-md-6">
             <canvas id="myChart3"></canvas>
         </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <form action="/dashboard" method="post">
+                <select class="form-select " name="mes">
+                    <option value="">Selecione o mês</option>
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03" active>Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-secondary" type="submit">Mês</button>
+        </div>
+        </form>
+
     </div>
 
 

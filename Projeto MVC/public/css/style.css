@@ -89,3 +89,26 @@ h5{
     box-shadow: 5px 7px rgba(266, 141, 155, .5);
     border-radius: 1%;
 }
+
+/*Animação*/
+[data-anime]{
+    opacity: 5%;
+    transition: 1s;
+}
+
+[data-anime="left"]{
+    transform: translate3d(-100px, 0, 0);
+}
+
+[data-anime="right"]{
+    transform: translate3d(100px, 0, 0);
+}
+
+[data-anime="top"]{
+    transform: translate3d(0, -100px, 0);
+}
+
+[data-anime].animate{
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}

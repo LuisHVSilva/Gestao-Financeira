@@ -12,10 +12,11 @@
             session_start();
 
             if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){
-                
-                $gasto = Container::getModel('Gastos');
 
-                $gasto->__set('id_usuario', $_SESSION['id']);                
+                $gasto = Container::getModel('Gastos');
+          
+                $gasto->__set('id_usuario', $_SESSION['id']);   
+                $gasto->__set('mes', date('m'));
                 $this->view->gastos =  $gasto->alguns();
 
                 
@@ -54,18 +55,27 @@
             session_start();
 
             if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){
+                
+                if($_POST == null){
+                    $_SESSION['mes'] = date('m');
+                    
+                } else {
+                    $_SESSION['mes'] = $_POST['mes'];                    
+                }                               
 
                 //Recuperação dos gastos somados do mês
                 $geral = Container::getModel('Gastos');
                 $geral->__set('id_usuario', $_SESSION['id']);
-                $geral->__set('mes', 2);
+                $geral->__set('mes', $_SESSION['mes']);                
                 $this->view->geral = $geral->alguns();
 
                 //Recuperando todos os gastos
                 $gastos = Container::getModel('Gastos');
                 $gastos->__set('id_usuario', $_SESSION['id']);
                 $this->view->gastos = $gastos->getAll();
-                              
+                
+                
+                
                 $this->render('dashboard', 'layout');
                 
             }else{
@@ -116,7 +126,22 @@
             }            
         }
 
+        public function mes(){
+            session_start();
+
+            if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){                
                 
+                $dados = Container::getModel('Dados');            
+                
+                $dados->dados_geral($_POST['mes']);
+
+                header('Location: /dashboard', 'layount');
+                
+            }else{
+                header('Location: /?login=erro');
+            }            
+
+        }
 
     }
 ?>
