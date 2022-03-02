@@ -10,10 +10,83 @@ header{
 
 
 main{
-    color: snow;
+    color: black;
+    font-size: 15px;    
 }
 
+#rosa1{
+    color: #f7cbcc;
+}
 
+#rosa2{
+    color: #fcc0c2;
+}
+
+#rosa3{
+    color: #ffb2c9;
+}
+
+#rosa4{
+    color: #f98cab;
+}
+
+#rosa5{
+    color: #ee9da4;
+}
+
+#rosa6{
+    color: #f97b90;
+}
+
+#rosa7{
+    color: #f98cab;
+}
+
+#rosa8{
+    color: #f97394;
+}
+
+#rosa9{
+    color: #d75f8d;
+}
+
+#rosa10{
+    color: #cd4d7d;
+}
+
+#rosa11{
+    color: #dd4166;
+}
+
+#rosa12{
+    color: #ec407a;
+}
+
+#rosa13{
+    color: #de2663;
+}
+
+#rosa14{
+    color: #c2175b;
+}
+
+#rosa15{
+    color: #ad1457;
+}
+
+/*
+*******Página index
+*/
+
+a{
+    text-decoration: none;
+    color: #cd4d7d;
+    font-weight: bold;
+}
+
+a:hover{
+    color: #f98cab;
+}
 
 /*Estrura de tags*/
 
@@ -53,7 +126,7 @@ h5{
 
 #titulo{
     border-bottom: 1px solid white;
-    color: rgb(243, 66, 96);
+    color: #d5185f;
 }
 
 #entrar-form input,
