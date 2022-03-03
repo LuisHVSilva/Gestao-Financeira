@@ -1,5 +1,9 @@
 <div class="container mt-5" id="entrada">
-   <p class="text-center">Veja abaixo a soma total dos seus gastos ao longo do mês</p>
+
+   <p class="h5 border-bottom border-light">Data: <?php echo date('d/m/Y') ?></p>
+   <br>
+   <p>Abaixo encontram-se as somas dos gastos divididos por categoria.</p>
+   
    <div class="row" data-anime="left">
       <div class="col-sm-4">
          <div class="card">
@@ -67,9 +71,9 @@
       </div>
    </div>
 
-   <div class="row mt-5" id="formulario">
+   <div class="row mt-5" id="formulario" data-anime="right">
       <div class="col-md-12 pt-4 pl-5 pr-5">
-         <p class="h3 text-center" id="titulo">Adicionar Gastos</p>
+         <p class="h3 text-center border-bottom border-light">Adicionar Gastos</p>
 
          <form method="post" action="/salvar">
             <div class="row">
@@ -104,5 +108,12 @@
             </div>
          </form>
       </div>
+   </div>
+  
+   <div class="row mt-5" data-anime="topo">
+      <p class="h5">Explicações</p>
+      <p>Gastos fixos: São os gastos que correspondem às dispesas mensais recorrentes e fixas, como contas de luz, água, aluguel, ou até mesmo fatura de cartão de crédito.</p>
+      <p>Gastos Variados: São os gastos sobressalente e que podem deixar de existir ao longo do ano, como um jantar fora, compra de algo específico, viagens, ...</p>
+      <p>Dentro de descrição colocar com o que foi gasto; de valor, o valor gasto; de tipo definir o tipo do gasto; e em data colocar a data que foi gasto</p>
    </div>
 </div>

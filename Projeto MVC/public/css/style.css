@@ -2,6 +2,7 @@
 body{
     background-color: black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: snow;
 }
 
 header{
@@ -14,6 +15,15 @@ main{
     font-size: 15px;    
 }
 
+.h5, h5{
+    color: #ee9da4;
+}
+
+.h3{
+    color: #de2663;
+}
+
+/**/
 #rosa1{
     color: #f7cbcc;
 }
@@ -88,6 +98,10 @@ a:hover{
     color: #f98cab;
 }
 
+/*
+*******Página entrada
+*/
+
 /*Estrura de tags*/
 
 #topo{
@@ -98,12 +112,6 @@ a:hover{
 mark{
     background-color: gray;
     border-radius: 4%;
-}
-
-
-h5{
-    color: rgb(243, 66, 96);
-    font-weight: bolder;
 }
 
 
@@ -142,10 +150,6 @@ h5{
     background-color: pink;
     font-weight: bold;
     box-shadow:0 0 1px 1px black;
-}
-
-#entrada{
-    color: pink
 }
 
 #formulario{

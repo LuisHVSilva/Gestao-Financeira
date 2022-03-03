@@ -124,24 +124,7 @@
             }else{
                 header('Location: /?login=erro');
             }            
-        }
-
-        public function mes(){
-            session_start();
-
-            if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){                
-                
-                $dados = Container::getModel('Dados');            
-                
-                $dados->dados_geral($_POST['mes']);
-
-                header('Location: /dashboard', 'layount');
-                
-            }else{
-                header('Location: /?login=erro');
-            }            
-
-        }
+        }       
 
     }
 ?>
