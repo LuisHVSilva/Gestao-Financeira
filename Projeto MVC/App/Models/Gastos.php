@@ -16,6 +16,8 @@ class Gastos extends Model
     private $tipo;
     private $data;    
     private $mes;
+    private $salario;
+    private $meta;
 
     //Como os atributos são privados, necessário usar os métodos get e set para poder usá-los e mudá-los
     public function __get($name)
@@ -115,5 +117,59 @@ class Gastos extends Model
         $stmt->execute();
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    //Adicionar meta
+    public function meta_adicionar()
+    {
+        $query = 'insert into meta (salario, meta, usuario) values (:salario, :meta, :usuario)';
+
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':salario', $this->__get('salario'));
+        $stmt->bindValue(':meta', $this->__get('meta'));
+        $stmt->bindValue(':usuario', $this->__get('id_usuario'));
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    //Procurar por meta
+    public function meta_procurar(){
+        
+        $query = "select salario, meta, DATE_FORMAT(data, '%d/%m/%Y') as data from meta where usuario = :id_usuario";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));                
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+    }
+
+    //alterar por meta
+    public function meta_alterar(){
+        
+        $query = "update meta set salario = :salario, meta = :meta, data = curdate() where usuario = :id_usuario";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':salario', $this->__get('salario'));
+        $stmt->bindValue(':meta', $this->__get('meta'));
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));        
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        
+    }
+
+    //excluir por meta
+    public function meta_excluir(){
+        
+        $query = "delete from meta where usuario = :id_usuario";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));        
+        $stmt->execute();        
+        
     }
 }

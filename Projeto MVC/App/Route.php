@@ -55,6 +55,25 @@
                 'action' => 'salvar' 
             );
 
+            $routes['meta'] = array(
+                'route' => '/meta',
+                'controller' => 'AppController', //Conteúdo para usuário
+                'action' => 'meta' 
+            );
+
+            $routes['meta_alterar'] = array(
+                'route' => '/meta_alterar',
+                'controller' => 'AppController', //Conteúdo para usuário
+                'action' => 'meta_alterar' 
+            );
+
+            $routes['meta_excluir'] = array(
+                'route' => '/meta_excluir',
+                'controller' => 'AppController', //Conteúdo para usuário
+                'action' => 'meta_excluir' 
+            );
+
+
             $routes['tabela'] = array(
                 'route' => '/tabela',
                 'controller' => 'AppController', //Conteúdo para usuário

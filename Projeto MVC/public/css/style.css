@@ -23,6 +23,29 @@ main{
     color: #de2663;
 }
 
+#fundo-branco{
+    color: black;
+    background-color: snow;
+}
+
+#fundo-rosa3{
+    background-color: #f3eaeb;
+    color: black;  
+    
+}
+
+#btn-preto:hover{
+    background: #de2663;
+}
+
+#btn-branco{
+    color: #f7cbcc;
+}
+
+#btn-branco:hover{
+    background: #de2663;
+}
+
 /**/
 #rosa1{
     color: #f7cbcc;
@@ -102,8 +125,6 @@ a:hover{
 *******Página entrada
 */
 
-/*Estrura de tags*/
-
 #topo{
     text-decoration: none;
     color: pink;
@@ -113,6 +134,13 @@ mark{
     background-color: gray;
     border-radius: 4%;
 }
+
+
+/*
+*******Página entrada
+*/
+
+
 
 
 /*Estrutura de classes*/
@@ -157,15 +185,11 @@ mark{
 }
 
 /*Página -> dashboard.phtml*/
-/*
-->Estrutura id
-*/
 
-#grafico{
-    border: 1px solid rgba(266, 141, 155, .9);
-    box-shadow: 5px 7px rgba(266, 141, 155, .5);
-    border-radius: 1%;
-}
+
+
+
+
 
 /*Animação*/
 [data-anime]{

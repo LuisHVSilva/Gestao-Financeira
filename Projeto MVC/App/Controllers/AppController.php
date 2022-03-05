@@ -17,8 +17,11 @@
           
                 $gasto->__set('id_usuario', $_SESSION['id']);   
                 $gasto->__set('mes', date('m'));
+                
                 $this->view->gastos =  $gasto->alguns();
-
+                $this->view->meta =  $gasto->meta_procurar();
+                
+                
                 
                 $this->render('entrada', 'layout');
                 
@@ -126,6 +129,65 @@
             }            
         }       
 
+        //Action de Banco de Dados
+        //Adicionar meta de gastos
+        public function meta(){
+            session_start();
+
+            if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){                
+                
+                $gastos = Container::getModel('Gastos');                
+                $gastos->__set('salario', $_POST['salario']);
+                $gastos->__set('meta', $_POST['meta']);
+                $gastos->__set('id_usuario', $_SESSION['id']);   
+                
+                $gastos->meta_adicionar();
+
+                header('Location: /entrada');
+                
+            }else{
+                header('Location: /?login=erro');
+            }            
+        } 
+
+        //Action de Banco de Dados
+        //Alterar meta de gastos
+        public function meta_alterar(){
+            session_start();
+
+            if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){                
+                
+                $gastos = Container::getModel('Gastos');                
+                $gastos->__set('salario', $_POST['salario']);
+                $gastos->__set('meta', $_POST['meta']);
+                $gastos->__set('id_usuario', $_SESSION['id']);   
+                
+                $gastos->meta_alterar();
+
+                header('Location: /entrada');
+                
+            }else{
+                header('Location: /?login=erro');
+            }            
+        }
+
+        //Action de Banco de Dados
+        //excluir metas
+        public function meta_excluir(){
+            session_start();
+
+            if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){                
+                   
+                $gastos = Container::getModel('Gastos');                                
+                $gastos->__set('id_usuario', $_GET['id_usuario']);                  
+                
+                $gastos->meta_excluir();
+
+                header('Location: /entrada');
+            }else{
+                header('Location: /?login=erro');
+            }            
+        } 
     }
 ?>
 

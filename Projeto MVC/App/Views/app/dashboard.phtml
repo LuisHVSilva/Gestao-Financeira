@@ -49,128 +49,61 @@ if (!empty($this->view->geral[0])) {
 ?>
 
 
-<div class="container mt-5" style="color:white">
+<div class="container mt-5">
 
-    <h3 class=""><?php
-                    if (empty($_POST)) {
-                        $mes = date('m');
-                    } else {
-                        $mes = $_POST['mes'];
-                    }
-                    switch ($mes) {
-                        case '01':
-                            $mes = 'Janeiro';
-                            break;
-                        case '02':
-                            $mes = 'Fevereiro';
-                            break;
-                        case '03':
-                            $mes = 'Março';
-                            break;
-                        case '04':
-                            $mes = 'Abril';
-                            break;
-                        case '05':
-                            $mes = 'Maio';
-                            break;
-                        case '06':
-                            $mes = 'Junho';
-                            break;
-                        case '07':
-                            $mes = 'Julho';
-                            break;
-                        case '08':
-                            $mes = 'Agosto';
-                            break;
-                        case '09':
-                            $mes = 'Setembro';
-                            break;
-                        case '10':
-                            $mes = 'Outubro';
-                            break;
-                        case '11':
-                            $mes = 'Novembro';
-                            break;
-                        case '12':
-                            $mes = 'Dezembro';
-                    };
+    <div class="row border-bottom p-3">
 
-                    echo $mes;
-                    ?>
-    </h3>
-
-    <div class="row mt-3" id="grafico">
-        <div class="col-6">
-            <h5 class="">Gastos Fixos</h5>
-            <p class="mt-2 mb-1">
-                Gasto total:
-                <?php
-                if ($fixo != 0) {
-                    echo 'R$' . $fixo;
-                } else {
-                    echo 'Sem dados';
-                }
-                ?>
-            </p>
-            <p>Maior gasto: <?php
-                            if ($fixo != 0) {
-                                echo $maximo_fixo . ' em ' . $descricao_fixo;
+        <div class="col-2">
+            <h3 class=""><?php
+                            if (empty($_POST)) {
+                                $mes = date('m');
                             } else {
-                                echo 'Sem dados';
+                                $mes = $_POST['mes'];
                             }
-                            ?></p>
-        </div>
-        <div class="col-md-6">
-            <canvas id="myChart1"></canvas>
-        </div>
-    </div>
+                            switch ($mes) {
+                                case '01':
+                                    $mes = 'Janeiro';
+                                    break;
+                                case '02':
+                                    $mes = 'Fevereiro';
+                                    break;
+                                case '03':
+                                    $mes = 'Março';
+                                    break;
+                                case '04':
+                                    $mes = 'Abril';
+                                    break;
+                                case '05':
+                                    $mes = 'Maio';
+                                    break;
+                                case '06':
+                                    $mes = 'Junho';
+                                    break;
+                                case '07':
+                                    $mes = 'Julho';
+                                    break;
+                                case '08':
+                                    $mes = 'Agosto';
+                                    break;
+                                case '09':
+                                    $mes = 'Setembro';
+                                    break;
+                                case '10':
+                                    $mes = 'Outubro';
+                                    break;
+                                case '11':
+                                    $mes = 'Novembro';
+                                    break;
+                                case '12':
+                                    $mes = 'Dezembro';
+                            };
 
-    <div class="row mt-3" id="grafico">
-        <div class="col-6">
-            <h5>Gastos Variados</h5>
-            <p>
-                Gasto total:
-                <?php
-                if ($variado != 0) {
-                    echo 'R$' . $variado;
-                } else {
-                    echo 'Sem dados';
-                }
-                ?>
-            </p>
-            <p>Maior gasto: <?php
-                            if ($variado != 0) {
-                                echo $maximo_variado . ' em ' . $descricao_variado;
-                            } else {
-                                echo 'Sem dados';
-                            }
-                            ?></p>
+                            echo $mes;
+                            ?>
+            </h3>
         </div>
-        <div class="col-md-6">
-            <canvas id="myChart2"></canvas>
-        </div>
-    </div>
 
-    <div class="row mt-3" id="grafico">
-        <div class="col-6">
-            <h5>Gastos Total</h5>
-            <p class="h4 text-center mt-5">
-
-                <?php
-                if ($fixo != 0 || $variado != 0) {
-                    echo 'R$' . $variado + $fixo;
-                } else {
-                    echo 'Sem dados';
-                }
-                ?>
-        </div>
-        <div class="col-md-6">
-            <canvas id="myChart3"></canvas>
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-md-4">
+        <div class="col-3">
             <form action="/dashboard" method="post">
                 <select class="form-select " name="mes">
                     <option value="">Selecione o mês</option>
@@ -188,10 +121,90 @@ if (!empty($this->view->geral[0])) {
                     <option value="12">Dezembro</option>
                 </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-auto ">
             <button class="btn btn-secondary" type="submit">Mês</button>
         </div>
         </form>
+    </div>
+
+    <!--    <div>
+        Gastos x Meta de Gastos
+    </div>
+                -->
+
+
+    <div class="row mt-4">
+        <div class="col-6 border-end">
+            <div>
+                <h5 class="text-center">Gastos Fixos</h5>
+                <p class="mt-4">
+                    Gasto total:
+                    <?php
+                    if ($fixo != 0) {
+                        echo 'R$' . $fixo;
+                    } else {
+                        echo 'Sem dados';
+                    }
+                    ?>
+                </p>
+                <p>Maior gasto: <?php
+                                if ($fixo != 0) {
+                                    echo $maximo_fixo . ' em ' . $descricao_fixo;
+                                } else {
+                                    echo 'Sem dados';
+                                }
+                                ?></p>
+
+                <canvas class="mt-4" id="myChart1"></canvas>
+            </div>
+        </div>
+
+
+        <div class="col-6">
+            <h5>Gastos Variados</h5>
+            <p class="mt-4">
+                Gasto total:
+                <?php
+                if ($variado != 0) {
+                    echo 'R$' . $variado;
+                } else {
+                    echo 'Sem dados';
+                }
+                ?>
+            </p>
+            <p>Maior gasto: <?php
+                            if ($variado != 0) {
+                                echo $maximo_variado . ' em ' . $descricao_variado;
+                            } else {
+                                echo 'Sem dados';
+                            }
+                            ?></p>
+
+            <canvas class="mt-4" id="myChart2"></canvas>
+        </div>
+    </div>
+
+
+    <div class="row mt-3 border-top">
+        <div class="col-6 mt-2">
+            <h5>Gastos Total</h5>
+            <p class="h4 text-center mt-5">
+
+                <?php
+                if ($fixo != 0 || $variado != 0) {
+                    echo 'R$' . $variado + $fixo;
+                } else {
+                    echo 'Sem dados';
+                }
+                ?>
+        </div>
+        <div class="col-md-6 mt-3">
+            <canvas id="myChart3"></canvas>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+
 
     </div>
 
