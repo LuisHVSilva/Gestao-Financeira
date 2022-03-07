@@ -104,6 +104,12 @@
                 'action' => 'dados_geral' 
             );
 
+            $routes['meta_salario'] = array(
+                'route' => '/meta_salario',
+                'controller' => 'DadosController', //Conteúdo de dados
+                'action' => 'meta_salario' 
+            );
+
           
             //Adicionando os atributos array criados acima na variável privada routes
             $this->setRoutes($routes);

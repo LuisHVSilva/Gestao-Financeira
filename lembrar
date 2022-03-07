@@ -1,168 +1,193 @@
-<?php
-$fixo = 0;
-$maximo_fixo = null;
-$descricao_fixo = null;
+<script>
+   function remover(id_usuario) {
+      location.href = '/meta_excluir?&id_usuario=' + id_usuario;
+   }
+</script>
 
-$variado = 0;
-$maximo_variado = null;
-$descricao_variado = null;
+<div class="container mt-5" id="entrada">
 
-if (!empty($this->view->geral[0])) {
+   <p class="h5 border-bottom border-light mb-4">Data: <?php echo date('d/m/Y') ?></p>
 
-    if ($this->view->geral[0]['tipo'] == 1) {
-        $fixo = $this->view->geral[0]['valor'];
+   <div class="row" data-anime="left">
+      <div class="col-sm-4">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title text-center">Gastos Fixos</h5>
+               <p class="text-center mt-2 mb-1">
+                  <?php
+                  if (!empty($this->view->gastos) && ($this->view->gastos[0]['tipo'] == 1)) {
+                     echo 'R$' . ($this->view->gastos[0]['valor']);
+                  } else {
+                     echo 'Sem dados';
+                  }
+                  ?>
+               </p>
+               <p class="card-text text-center"><small class="text-muted">Contas mensais</small></p>
+            </div>
+         </div>
+      </div>
 
-        foreach ($this->view->gastos as $key => $gastos) {
-            if ($gastos['tipo'] == 'Fixo') {
-                if (intval($gastos['valor']) > $maximo_fixo) {
-                    $maximo_fixo = $gastos['valor'];
-                    $descricao_fixo = $gastos['descricao'];
-                }
-            }
-        }
+      <div class="col-sm-4">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title text-center">Variados</h5>
+               <p class="text-center mt-2 mb-1">
+                  <?php
+                  if (!empty($this->view->gastos) && ($this->view->gastos[0]['tipo'] == 2)) {
+                     echo 'R$' . ($this->view->gastos[0]['valor']);
+                  } else if (!empty($this->view->gastos[1])) {
+                     echo 'R$' . ($this->view->gastos[1]['valor']);
+                  } else {
+                     echo 'Sem dados';
+                  }
+                  ?>
+               </p>
+               <p class="card-text text-center"><small class="text-muted ">Lazer</small></p>
+            </div>
+         </div>
+      </div>
 
-        if (!empty($this->view->geral[1])) {
-            $variado = $this->view->geral[1]['valor'];
-
-            foreach ($this->view->gastos as $key => $gastos) {
-
-                if ($gastos['tipo'] == 'Variado') {
-                    if (intval($gastos['valor']) > $maximo_variado) {
-
-                        $maximo_variado = $gastos['valor'];
-                        $descricao_variado = $gastos['descricao'];
-                    }
-                }
-            }
-        }
-    } else {
-        $variado = $this->view->geral[0]['valor'];
-        foreach ($this->view->gastos as $key => $gastos) {
-
-            if (intval($gastos['valor']) > $maximo_variado) {
-                $maximo_variado = $gastos['valor'];
-                $descricao_variado = $gastos['descricao'];
-            }
-        }
-    }
-} 
-?>
-
-
-<div class="container mt-5" style="color:white">
-
-    <h3 class=""><?php
-                    switch (date('m')) {
-                        case '01':
-                            $mes = 'Janeiro';
-                            break;
-                        case '02':
-                            $mes = 'Fevereiro';
-                            break;
-                        case '03':
-                            $mes = 'Março';
-                            break;
-                        case '04':
-                            $mes = 'Abril';
-                            break;
-                        case '05':
-                            $mes = 'Maio';
-                            break;
-                        case '06':
-                            $mes = 'Junho';
-                            break;
-                        case '07':
-                            $mes = 'Julho';
-                            break;
-                        case '08':
-                            $mes = 'Agosto';
-                            break;
-                        case '09':
-                            $mes = 'Setembro';
-                            break;
-                        case '10':
-                            $mes = 'Outubro';
-                            break;
-                        case '11':
-                            $mes = 'Novembro';
-                            break;
-                        case '12':
-                            $mes = 'Dezembro';
-                    };
-
-                    echo 'Mês Atual: ' . $mes;
-                    ?>
-    </h3>
-
-    <div class="row mt-3" id="grafico">
-        <div class="col-6">
-            <h5 class="">Gastos Fixos</h5>
-            <p class="mt-2 mb-1">
-                Gasto total:
-                <?php
-                if ($fixo != 0) {
-                    echo 'R$' . $fixo;
-                } else {
-                    echo 'Sem dados';
-                }
-                ?>
-            </p>
-            <p>Maior gasto: <?php
-                            if ($fixo != 0) {
-                                echo $maximo_fixo . ' em ' . $descricao_fixo;
-                            } else {
-                                echo 'Sem dados';
-                            }
-                            ?></p>
-        </div>
-        <div class="col-md-6">
-            <canvas id="myChart1"></canvas>
-        </div>
-    </div>
-
-    <div class="row mt-3" id="grafico">
-        <div class="col-6">
-            <h5>Gastos Variados</h5>
-            <p>
-                Gasto total:
-                <?php
-                if ($variado != 0) {
-                    echo 'R$' . $variado;
-                } else {
-                    echo 'Sem dados';
-                }
-                ?>
-            </p>
-            <p>Maior gasto: <?php
-                            if ($variado != 0) {
-                                echo $maximo_variado . ' em ' . $descricao_variado;
-                            } else {
-                                echo 'Sem dados';
-                            }
-                            ?></p>
-        </div>
-        <div class="col-md-6">
-            <canvas id="myChart2"></canvas>
-        </div>
-    </div>
-
-    <div class="row mt-3" id="grafico">
-        <div class="col-6">
-            <h5>Gastos Total</h5>
-            <p class="h4 text-center mt-5">
-                
-                <?php
-                if ($fixo != 0 ||$variado != 0) {
-                    echo 'R$' . $variado+$fixo;
-                } else {
-                    echo 'Sem dados';
-                }
-                ?>
-        </div>
-        <div class="col-md-6">
-            <canvas id="myChart3"></canvas>
-        </div>
-    </div>
-
-
+      <div class="col-sm-4">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title text-center">Total</h5>
+               <p class="text-center mt-2 mb-1">
+                  <?php
+                  if (!empty($this->view->gastos[0]) && !empty($this->view->gastos[1])) {
+                     echo 'R$' . (($this->view->gastos[0]['valor']) + ($this->view->gastos[1]['valor']));
+                  } else if (!empty($this->view->gastos[0]) && empty($this->view->gastos[1])) {
+                     echo 'R$' . ($this->view->gastos[0]['valor']);
+                  } else if (empty($this->view->gastos[0]) && !empty($this->view->gastos[1])) {
+                     echo 'R$' . ($this->view->gastos[1]['valor']);
+                  } else {
+                     echo 'Sem dados';
+                  }
+                  ?>
+               </p>
+               <p class="card-text text-center"><small class="text-muted">Soma de tudo</small></p>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
+
+<div id="fundo-rosa3">
+   <div class="container">
+      <div class="row mt-4" data-anime="right">
+         <div class="col-md-12 pt-4 pl-5 pr-5">
+            <p class="h3 text-center border-bottom border-dark">Adicionar Gastos</p>
+
+            <form method="post" action="/salvar">
+               <div class="row">
+                  <div class="col-md-4">
+                     <p>Descrição</p>
+                     <input type="text" class="form-control" name="descricao">
+                  </div>
+
+                  <div class="col-md-4">
+                     <p>Valor</p>
+                     <div class="input-group">
+                        <div class="input-group-text">R$</div>
+                        <input type="number" step="0.01" class="form-control" name="valor">
+                     </div>
+                  </div>
+
+                  <div class="col-md-4">
+                     <p>Tipo</p>
+                     <select class="form-select" name="tipo">
+                        <option></option>
+                        <option value="1">Fixo</option>
+                        <option value="2">Variado</option>
+                     </select>
+                  </div>
+
+                  <div class="col-md-4 mt-4">
+                     <p>Data</p>
+                     <input type="date" class="form-control" name="data">
+                  </div>
+
+                  <div class="col-auto mt-5">
+
+                     <button class="btn btn-outline-dark mt-3 mb-2" id="btn-preto" type="submit">Registrar</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<?php if (empty($this->view->meta)) { ?>
+   <div class="mt-4" id="fundo-branco">
+      <div class="container pt-3 pb-3" data-anime="left">
+         <p>Caso deseje ter uma melhor esperiência em tomar conta dos seus gastos, preencha abaixo.</p>
+         <form action="/meta" method="post">
+            <div class="row">
+               <div class="col-auto">
+                  <label for="salario">Quanto é seu salário?</label>
+                  <div class="input-group">
+                     <div class="input-group-text">R$</div>
+                     <input type="number" step="0.01" name="salario" class="form-control">
+                  </div>
+               </div>
+               <div class="col-auto">
+                  <label for="meta">Meta de gasto mensal?</label>
+                  <div class="input-group">
+                     <div class="input-group-text">R$</div>
+                     <input type="number" step="0.01" name="meta" class="form-control">
+                  </div>
+               </div>
+               <div class="col-auto mt-4">
+                  <button class="btn btn-outline-dark" id="btn-preto" type="submit">Enviar</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   <?php } else { ?>
+      <div class="container mt-4">
+         <div class="row">
+            <div class="col-auto mt-1">
+               <p>Suas metas e salário já foram estabelecidos em <?php echo $this->view->meta[0]['data'] ?>.</p>
+            </div>
+            <div class="col-auto">
+               <p>
+                  <a class="btn btn-outline-light btn-sm" data-bs-toggle="collapse" href="#alterar" role="button" arial-expanded="false" arial-controls="alterar" id="btn-branco">Deseja Alterá-los?</a>
+
+               </p>
+               <div class="collapse" id="alterar">
+                  <div class="card card-body" style=" color: black">
+                     <form action="/meta_alterar" method="post">
+                        <div class="row">
+                           <div class="col-auto">
+                              <label for="salario">Novo valor de salário?</label>
+                              <div class="input-group">
+                                 <div class="input-group-text">R$</div>
+                                 <input type="number" step="0.01" name="salario" class="form-control" value="<?php echo $this->view->meta[0]['salario'] ?>">
+                              </div>
+                           </div>
+                           <div class="col-auto">
+                              <label for="meta">Nova meta de gasto mensal?</label>
+                              <div class="input-group">
+                                 <div class="input-group-text">R$</div>
+                                 <input type="number" step="0.01" name="meta" class="form-control" value="<?php echo $this->view->meta[0]['meta'] ?>">
+                              </div>
+                           </div>
+                           <div class="col-auto mt-4">
+                              <button class="btn btn-outline-dark" id="btn-preto" type="submit">Enviar</button>
+                           </div>
+
+                     </form>
+                     <div class="col-auto mt-4">
+                        <a class="btn btn-outline-danger" onclick="remover(<?php echo $_SESSION['id'] ?>)" ;>Deseja apagá-los?</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+   </div>
+
+<?php } ?>

@@ -8,7 +8,9 @@ $('document').ready(function () {
             success: function (data) {
 
                 var fixo = [];
+                var valor_fixo = 0;
                 var variado = [];
+                var valor_variado = 0;
                 var data_fixo = [];
                 var data_variado = [];
                 
@@ -16,14 +18,17 @@ $('document').ready(function () {
                     if (data[i].tipo == 'Fixo') {                        
                         fixo.push(data[i].valor);
                         data_fixo.push(parseInt(data[i].data.substr(0, 2)));
+                        valor_fixo += parseInt(data[i].valor)
                     } else {
                         variado.push(data[i].valor);
                         data_variado.push(parseInt(data[i].data.substr(0, 2)));
+                        valor_variado += parseInt(data[i].valor)
                     };                
                 };                                
 
-                grafico(fixo, data_fixo, 'Fixo', 1);
-                grafico(variado, data_variado, 'Variado', 2);
+                grafico_line(fixo, data_fixo, 'Fixo', 1, '#f7cbcc');
+                grafico_line(variado, data_variado, 'Variado', 2, '#f98cab');
+                grafico_pie(valor_fixo, valor_variado);
                 
 
             }
@@ -41,22 +46,63 @@ $('document').ready(function () {
                     valor.push(data[i].valor);
                     date.push(parseInt(data[i].data.substr(0, 2)));
                 };                                
-                grafico(valor,date, 'Geral', 3)
+                grafico_line(valor,date, 'Gasto Total', 3, 'rgb(255, 99, 132)')
+            }            
+
+        })
+
+        $.ajax({
+            type: "POST",
+            url: "/meta_salario",
+            dataType: "json",
+            success: function (data) {                
+                meta = data[0].meta
+                console.log(valor)
+                date = data[0].data                                
             }            
 
         })
     })
 })
 
-function grafico(valor, date, titulo, numero) {
+function grafico_pie(fixo, variado){
+    const valor = [fixo, variado]
+    const data = {
+        labels: ['Fixo', 'Variado'],
+        datasets: [{
+            label: 'Dataset 1',
+            data: valor,
+            backgroundColor: ['#f7cbcc', '#f98cab']
+        }]
+    }
+
+    const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend : {
+                    position: 'right',
+                },
+            }
+        }
+    }
+
+    const myChart = new Chart(
+        document.getElementById('myChart4'),
+        config
+    );
+}
+function grafico_line(valor, date, titulo, numero, cor) {
     const labels = date;
 
     const data = {
         labels: labels,
         datasets: [{
             label: titulo,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: cor,
+            borderColor: cor,
             fill: false,
             cubicInterpolationMode: 'monotone',
             data: valor,            

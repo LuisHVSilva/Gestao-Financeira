@@ -73,9 +73,10 @@
                 $this->view->geral = $geral->alguns();
 
                 //Recuperando todos os gastos
-                $gastos = Container::getModel('Gastos');
-                $gastos->__set('id_usuario', $_SESSION['id']);
-                $this->view->gastos = $gastos->getAll();
+                $this->view->gastos = $geral->getAll();
+
+                //Recuperando a meta
+                $this->view->meta =  $geral->meta_procurar();
                 
                 
                 

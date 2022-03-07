@@ -8,64 +8,52 @@
 
    <p class="h5 border-bottom border-light mb-4">Data: <?php echo date('d/m/Y') ?></p>
 
-   <div class="row" data-anime="left">
-      <div class="col-sm-4">
-         <div class="card">
-            <div class="card-body">
-               <h5 class="card-title text-center">Gastos Fixos</h5>
-               <p class="text-center mt-2 mb-1">
-                  <?php
-                  if (!empty($this->view->gastos) && ($this->view->gastos[0]['tipo'] == 1)) {
-                     echo 'R$' . ($this->view->gastos[0]['valor']);
-                  } else {
-                     echo 'Sem dados';
-                  }
-                  ?>
-               </p>
-               <p class="card-text text-center"><small class="text-muted">Contas mensais</small></p>
-            </div>
-         </div>
-      </div>
-
-      <div class="col-sm-4">
-         <div class="card">
-            <div class="card-body">
-               <h5 class="card-title text-center">Variados</h5>
-               <p class="text-center mt-2 mb-1">
-                  <?php
-                  if (!empty($this->view->gastos) && ($this->view->gastos[0]['tipo'] == 2)) {
-                     echo 'R$' . ($this->view->gastos[0]['valor']);
-                  } else if (!empty($this->view->gastos[1])) {
-                     echo 'R$' . ($this->view->gastos[1]['valor']);
-                  } else {
-                     echo 'Sem dados';
-                  }
-                  ?>
-               </p>
-               <p class="card-text text-center"><small class="text-muted ">Lazer</small></p>
-            </div>
-         </div>
-      </div>
-
-      <div class="col-sm-4">
-         <div class="card">
-            <div class="card-body">
-               <h5 class="card-title text-center">Total</h5>
-               <p class="text-center mt-2 mb-1">
-                  <?php
+   <div class="d-flex justify-content-around">
+      <div class="card" data-anime="right">
+         <div class="card-body">
+            <h5 class="card-title text-center">Gasto restante</h5>
+            <p class="text-center mt-2">
+               <?php
+               if (!empty($this->view->meta)) {
                   if (!empty($this->view->gastos[0]) && !empty($this->view->gastos[1])) {
-                     echo 'R$' . (($this->view->gastos[0]['valor']) + ($this->view->gastos[1]['valor']));
+                     $valor = ($this->view->meta[0]['meta']) - (($this->view->gastos[0]['valor']) + ($this->view->gastos[1]['valor']));
                   } else if (!empty($this->view->gastos[0]) && empty($this->view->gastos[1])) {
-                     echo 'R$' . ($this->view->gastos[0]['valor']);
+                     $valor = ($this->view->meta[0]['meta']) - ($this->view->gastos[0]['valor']);
                   } else if (empty($this->view->gastos[0]) && !empty($this->view->gastos[1])) {
-                     echo 'R$' . ($this->view->gastos[1]['valor']);
-                  } else {
-                     echo 'Sem dados';
+                     $valor = ($this->view->meta[0]['meta']) - ($this->view->gastos[1]['valor']);
                   }
-                  ?>
-               </p>
-               <p class="card-text text-center"><small class="text-muted">Soma de tudo</small></p>
-            </div>
+               }
+
+               if (empty($valor)) {
+                  echo 'Sem meta/salário cadastrados';
+               } else if ($valor > 0) { ?>
+            <p class="text-success text-center"><?php echo 'R$ ' . $valor; ?></p>
+         <?php
+               } else if ($valor <= 0) { ?>
+            <p class="text-danger text-center"><?php echo 'R$ ' . $valor; ?></p>
+         <?php
+               }
+         ?>
+         </p>
+         </div>
+      </div>
+
+      <div class="card" data-anime="left">
+         <div class="card-body">
+            <h5 class="card-title text-center">Total Gasto</h5>
+            <p class="text-center mt-2">
+               <?php
+               if (!empty($this->view->gastos[0]) && !empty($this->view->gastos[1])) {
+                  echo 'R$ ' . (($this->view->gastos[0]['valor']) + ($this->view->gastos[1]['valor']));
+               } else if (!empty($this->view->gastos[0]) && empty($this->view->gastos[1])) {
+                  echo 'R$ ' . ($this->view->gastos[0]['valor']);
+               } else if (empty($this->view->gastos[0]) && !empty($this->view->gastos[1])) {
+                  echo 'R$ ' . ($this->view->gastos[1]['valor']);
+               } else {
+                  echo 'Sem dados';
+               }
+               ?>
+            </p>
          </div>
       </div>
    </div>

@@ -88,6 +88,21 @@ class Dados extends Model
         echo json_encode($result, $this->__get('mes'));
     }
 
+    public function ajax3()
+    {
+        $query = "select meta, DATE_FORMAT(data, '%d/%m/%Y') as data from meta where usuario = :id_usuario";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));                
+        $stmt->execute();
+
+        while ($results = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $result[] = $results;
+        };
+        
+        echo json_encode($result);
+    }
+
     
 
 }

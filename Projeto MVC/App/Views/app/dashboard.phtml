@@ -7,6 +7,8 @@ $variado = 0;
 $maximo_variado = null;
 $descricao_variado = null;
 
+$meta = 0;
+
 if (!empty($this->view->geral[0])) {
 
     if ($this->view->geral[0]['tipo'] == 1) {
@@ -45,6 +47,11 @@ if (!empty($this->view->geral[0])) {
             }
         }
     }
+
+    if(!empty($this->view->meta)){
+        $meta = $this->view->meta[0]['meta'];
+    }
+    
 }
 ?>
 
@@ -53,7 +60,7 @@ if (!empty($this->view->geral[0])) {
 
     <div class="row border-bottom p-3">
 
-        <div class="col-2">
+        <div class="col-auto">
             <h3 class=""><?php
                             if (empty($_POST)) {
                                 $mes = date('m');
@@ -103,10 +110,10 @@ if (!empty($this->view->geral[0])) {
             </h3>
         </div>
 
-        <div class="col-3">
+        <div class="col-auto">
             <form action="/dashboard" method="post">
                 <select class="form-select " name="mes">
-                    <option value="">Selecione o mês</option>
+                    <option class="text-center" value="">Mês</option>
                     <option value="01">Janeiro</option>
                     <option value="02">Fevereiro</option>
                     <option value="03" active>Março</option>
@@ -121,22 +128,70 @@ if (!empty($this->view->geral[0])) {
                     <option value="12">Dezembro</option>
                 </select>
         </div>
-        <div class="col-auto ">
-            <button class="btn btn-secondary" type="submit">Mês</button>
+        <div class="col-2 ">
+            <button class="btn btn-secondary" type="submit">Selecionar</button>
         </div>
         </form>
     </div>
 
-    <!--    <div>
-        Gastos x Meta de Gastos
-    </div>
-                -->
+    <div class="row mt-3 p-2 border-bottom">
 
+        <h5 class="text-center mt-2">Visão Geral</h5>
+
+
+        <div class="col-sm-6 mt-5">
+            <canvas id="myChart3"></canvas>
+        </div>
+
+        <div class="col-sm-5 offset-sm-1">
+            <canvas id="myChart4"></canvas>
+        </div>
+
+        <div class="d-inline-flex">
+            <div>
+                <p class="text-center"> Gasto total:
+                    <i>
+                        <?php
+                        if ($fixo != 0 || $variado != 0) {
+                            echo 'R$' . $variado + $fixo;
+                        } else {
+                            echo 'Sem dados';
+                        }
+                        ?>
+                    </i>
+                </p>
+            </div>
+        </div>
+        <div class="d-inline-flex">
+            <p>Gasto faltante para estourar o teto:          
+                    <i>
+                        <?php
+                        if ($fixo != 0 || $variado != 0) {
+                            $total = $meta - ($variado + $fixo);
+                            if ($total <= 0){?>
+                                <p class="text-danger"> <?php echo ' R$ '.$total; ?></p>  
+                            <?php } else { ?>
+                                <p class="text-success"><?php echo ' R$ '.$total; ?></p>
+                            <?php }                            
+                        } else {
+                            echo 'Sem dados';
+                        }
+                        ?>
+                    </i>
+                </p>
+        </div>
+
+
+    </div>
 
     <div class="row mt-4">
         <div class="col-6 border-end">
             <div>
                 <h5 class="text-center">Gastos Fixos</h5>
+                
+
+                <canvas class="mt-4" id="myChart1"></canvas>
+
                 <p class="mt-4">
                     Gasto total:
                     <?php
@@ -154,14 +209,16 @@ if (!empty($this->view->geral[0])) {
                                     echo 'Sem dados';
                                 }
                                 ?></p>
-
-                <canvas class="mt-4" id="myChart1"></canvas>
             </div>
         </div>
 
 
         <div class="col-6">
             <h5>Gastos Variados</h5>
+            
+
+            <canvas class="mt-4" id="myChart2"></canvas>
+
             <p class="mt-4">
                 Gasto total:
                 <?php
@@ -179,34 +236,15 @@ if (!empty($this->view->geral[0])) {
                                 echo 'Sem dados';
                             }
                             ?></p>
-
-            <canvas class="mt-4" id="myChart2"></canvas>
         </div>
     </div>
 
 
-    <div class="row mt-3 border-top">
-        <div class="col-6 mt-2">
-            <h5>Gastos Total</h5>
-            <p class="h4 text-center mt-5">
-
-                <?php
-                if ($fixo != 0 || $variado != 0) {
-                    echo 'R$' . $variado + $fixo;
-                } else {
-                    echo 'Sem dados';
-                }
-                ?>
-        </div>
-        <div class="col-md-6 mt-3">
-            <canvas id="myChart3"></canvas>
-        </div>
-    </div>
-
-    <div class="row mt-3">
 
 
-    </div>
 
+</div>
 
+<div class="container">
+    
 </div>

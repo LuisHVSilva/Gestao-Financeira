@@ -46,6 +46,26 @@
             }
             
         }
+
+        public function meta_salario(){                        
+            session_start();
+
+            if($_SESSION['id'] != '' && $_SESSION['nome'] != ''){
+
+                //Recuperação dos gastos                
+                $ajax = Container::getModel('Dados');
+                $ajax->__set('id_usuario', $_SESSION['id']);                 
+                
+                $this->view->ajax = $ajax->ajax3();
+                $this->render('meta_salario', '');
+
+                
+                
+            }else{
+                header('Location: /?login=erro');
+            }
+            
+        }
         
     }
 ?>
